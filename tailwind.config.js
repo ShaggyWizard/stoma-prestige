@@ -10,7 +10,7 @@ module.exports = {
             colors: {
                 'primary': '#D72642',
                 'primary-hover': '#BB132E',
-                'additional': '#BB132E',
+                'additional': '#FBECEE',
                 'black': '#141515',
                 'grey-1': '#646363',
                 'grey-2': '#AEAEAE',
