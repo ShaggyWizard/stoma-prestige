@@ -32,7 +32,7 @@ export default function Page() {
                 <h4 className="font-bold">{data.subtitle1}</h4>
                 <div className="grid grid-cols-4 gap-2">
                     {data.offers.map((_offer, _i) =>
-                        <ServiseCard image={_offer.image}>{_offer.text}</ServiseCard>
+                        <ServiseCard key={_i} image={_offer.image}>{_offer.text}</ServiseCard>
                     )}
                 </div>
             </div>
