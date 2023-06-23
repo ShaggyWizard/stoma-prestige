@@ -6,6 +6,9 @@ module.exports = {
         './src/app/**/*.{js,ts,jsx,tsx,mdx}',
     ],
     theme: {
+        fontFamily: {
+            'blblbl': ['"Comic Sans MS"',  '"Comic Sans"'],
+        },
         extend: {
             colors: {
                 'primary': '#D72642',
