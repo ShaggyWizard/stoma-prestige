@@ -1,12 +1,13 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import GallerySlider from './components/gallerySlider'
-import ObjectSlider from './components/objectSlider'
-import Enroll from './components/enroll'
-import FaqCard from './components/faqCard'
-import ReviewSlider from './components/reviewSlider'
-import Map from './components/map'
-import Rassrochka from './components/rassrochka'
+import GallerySlider from '@/components/gallerySlider'
+import ObjectSlider from '@/components/objectSlider'
+import Enroll from '@/components/enroll'
+import FaqCard from '@/components/faqCard'
+import ReviewSlider from '@/components/reviewSlider'
+import Map from '@/components/map'
+import Rassrochka from '@/components/rassrochka'
+import ServiseCard from '@/components/ServiceCard'
 
 
 export default function Home() {
@@ -73,16 +74,6 @@ const FirstBlock = () => {
             </div>
 
             <Rassrochka />
-        </div>
-    )
-}
-const ServiseCard = ({ image, children }) => {
-    return (
-        <div className='bg-white text-black p-6 rounded-3xl h-[220px] border border-grey-4 flex flex-col justify-between'>
-            <p>{children}</p>
-            {image &&
-                <Image className='self-end' width={64} height={64} src={image} alt="" />
-            }
         </div>
     )
 }

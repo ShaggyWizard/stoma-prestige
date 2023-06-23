@@ -1,7 +1,7 @@
 import Image from "next/image"
-import PriceList from "../components/priceList"
-import Rassrochka from "../components/rassrochka"
-import Enroll from "../components/enroll"
+import Rassrochka from "@/components/rassrochka"
+import Enroll from "@/components/enroll"
+import PriceList from "@/components/priceList"
 
 export default function Home() {
     const nodes = [

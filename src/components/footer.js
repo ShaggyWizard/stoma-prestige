@@ -1,37 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export default function Footer() {
-    const nodes = [
-        {
-            name: "Услуги",
-            link: "",
-        },
-        {
-            name: "Клиника",
-            link: "",
-        },
-        {
-            name: "Врачи",
-            link: "",
-        },
-        {
-            name: "Отзывы",
-            link: "",
-        },
-        {
-            name: "Работы",
-            link: "",
-        },
-        {
-            name: "Вопрос-ответ",
-            link: "",
-        },
-        {
-            name: "Контакты",
-            link: "",
-        },
-    ]
+export default function Footer({paths}) {
 
     return (
         <footer className="bg-white py-20">
@@ -58,7 +28,7 @@ export default function Footer() {
 
 
                 <div className="flex gap-8">
-                    {nodes.map((node, i) =>
+                    {paths.map((node, i) =>
                         <Link key={i}
                             className="
                                 transition-colors duration-300

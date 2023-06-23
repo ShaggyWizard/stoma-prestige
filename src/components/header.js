@@ -4,37 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation"
 
-export default function Header() {
-    const nodes = [
-        {
-            name: "Услуги",
-            link: "/uslugi",
-        },
-        {
-            name: "Клиника",
-            link: "",
-        },
-        {
-            name: "Врачи",
-            link: "",
-        },
-        {
-            name: "Отзывы",
-            link: "",
-        },
-        {
-            name: "Работы",
-            link: "",
-        },
-        {
-            name: "Вопрос-ответ",
-            link: "",
-        },
-        {
-            name: "Контакты",
-            link: "",
-        },
-    ]
+export default function Header({paths}) {
     const pathname = usePathname();
 
     return (
@@ -44,7 +14,7 @@ export default function Header() {
                     <Image width={195} height={55} src={pathname === "/" ? "/icons/logo-white.svg" : "/icons/logo-red.svg"} alt="" />
                 </Link>
                 <div className="flex gap-8">
-                    {nodes.map((node, i) => {
+                    {paths.map((node, i) => {
                         if (pathname === node.link) return (
                             <div key={i} className="pb-2.5 border-b border-transparent text-primary">
                                 <p>{node.name}</p>

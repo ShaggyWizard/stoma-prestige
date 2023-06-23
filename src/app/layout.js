@@ -1,5 +1,5 @@
-import Footer from './components/footer';
-import Header from './components/header';
+import Footer from '@/components/footer';
+import Header from '@/components/header';
 import './globals.css'
 import 'swiper/css';
 
@@ -10,12 +10,43 @@ export const metadata = {
 }
 
 export default function RootLayout({ children }) {
+
+    const paths = [
+        {
+            name: "Услуги",
+            link: "/pricing",
+        },
+        {
+            name: "Клиника",
+            link: "/clinic",
+        },
+        {
+            name: "Врачи",
+            link: "/staff",
+        },
+        {
+            name: "Отзывы",
+            link: "/reviews",
+        },
+        {
+            name: "Работы",
+            link: "/works",
+        },
+        {
+            name: "Вопрос-ответ",
+            link: "/faq",
+        },
+        {
+            name: "Контакты",
+            link: "/contacts",
+        },
+    ]
     return (
         <html lang="en">
             <body>
-                <Header />
+                <Header paths={paths} />
                 {children}
-                <Footer />
+                <Footer paths={paths} />
             </body>
 
         </html>
