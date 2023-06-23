@@ -88,3 +88,12 @@ body {
     text-decoration-skip-ink: none;
     overflow-x: hidden;
 }
+
+.underscorer a {
+    text-decoration: underline;
+}
+
+.underscorer li {
+    list-style-type: disc;
+    margin-left: 2rem;
+}
