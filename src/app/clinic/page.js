@@ -9,10 +9,10 @@ export default function Page() {
         text2: "В нашей клинике созданы все условия для того, чтобы вы чувствовали себя комфортно. Наша дружная команда профессионалов сделала сотни красивых улыбок, которые изменили жизнь пациентов к лучшему. Мы используем только современные технологии и материалы. Благодаря опыту наших врачей мы восстанавливаем здоровье ваших зубов даже в сложных случаях.",
         text3: "<p>Стоматологическая клиника “Стома Престиж”<br />\nг. Якутск,  <a href=\"https://www.youtube.com/watch?v=g1mPqu7u39o&amp;ab_channel=REDGroup\">ул. Лермонтова, 23</a>, ​1 этаж​</p>\n<br />\n<ul>\n<li>Реквизиты</li>\n<li>Сведения об учредителях</li>\n</ul>\n",
         offers: [
-            { text: "Предложение 1", image: "/icons/offers/icon1.svg" },
-            { text: "Предложение 2", image: "/icons/offers/icon (1).svg" },
-            { text: "Предложение 3", image: "/icons/offers/icon (2).svg" },
-            { text: "Предложение 4", image: "/icons/offers/icon (3).svg" },
+            { text: "Гибкая система оплаты", image: "/icons/offers/icon1.svg" },
+            { text: "Удобное время посещения", image: "/icons/offers/icon (1).svg" },
+            { text: "Прием без очереди", image: "/icons/offers/icon (2).svg" },
+            { text: "Вежливый персонал", image: "/icons/offers/icon (3).svg" },
         ],
         subtitle1: "Мы предлагаем:",
         subtitle2: "Наша клиника",
@@ -21,9 +21,10 @@ export default function Page() {
         subtitle5: "Документы",
 
         doctors: [
-            { name: "Вэш ", role: "Ураган", image: "/images/Vash.png" },
+            { name: "Вэш Ураган", role: "Человек стомостью в 60000000000$$", image: "/images/Vash.png" },
             { name: "Найвс Миллионс", role: "Найвс", image: "/images/Knives.png" },
             { name: "Николас Д. Вульфвуд", role: "Священник" },
+           // { name: "Мэрил Страйф", role: "Страховщик", image: "" },
         ],
     }
 
