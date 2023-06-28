@@ -33,7 +33,7 @@ export default function ReviewSlider({ children, nodes }) {
                             <p>{node.text}</p>
                             <div className="flex justify-between relative">
                                 <p>{node.name}</p>
-                                <Image className="opacity-10" src="/icons/2gis.svg" width={95} height={31} />
+                                <Image className="opacity-10" src="/icons/2gis.svg" width={95} height={31} alt="" />
                             </div>
                         </div>
                     </SwiperSlide>

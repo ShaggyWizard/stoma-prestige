@@ -95,11 +95,11 @@ export default async function Home() {
 
                 <div className="container mx-auto grid grid-cols-2 gap-4">
                 {reviews.map((_node,_i) => 
-                    <div className="rounded-3xl bg-white border border-grey-4 flex flex-col gap-6 p-6">
+                    <div key={_i} className="rounded-3xl bg-white border border-grey-4 flex flex-col gap-6 p-6">
                             <p>{_node.text}</p>
                             <div className="flex justify-between relative">
                                 <p>{_node.name}</p>
-                                <Image className="opacity-10" src="/icons/2gis.svg" width={95} height={31} />
+                                <Image className="opacity-10" src="/icons/2gis.svg" alt="" width={95} height={31} />
                             </div>
                         </div>
                 )}   

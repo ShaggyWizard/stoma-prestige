@@ -100,7 +100,7 @@ export default async function Home() {
                     <h3>{works.title}</h3>
                     <div className="grid grid-cols-2 gap-2">
                         {works.cards.map((_node, _i) =>
-                            <WorkCard node={_node} />
+                            <WorkCard key={_i} node={_node} />
                         )}
                     </div>
                 </div>

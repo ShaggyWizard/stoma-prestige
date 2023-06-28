@@ -91,8 +91,8 @@ export default async function Page() {
             </div>
             <div className="container overflow-hidden grid grid-cols-3 mx-auto h-[300px] gap-2">
                 {banner.images.slice(0, 3).map((_photo, _i) =>
-                    <div className="relative rounded-3xl overflow-hidden">
-                        <Image className="object-cover  hover:scale-110 transition-transform duration-300" fill src={_photo} />
+                    <div key={_i} className="relative rounded-3xl overflow-hidden">
+                        <Image className="object-cover  hover:scale-110 transition-transform duration-300" alt="" fill src={_photo} />
                     </div>
 
                 )}

@@ -343,7 +343,7 @@ const About = ({ data, offer }) => {
                 <h4>{offer?.offerText}</h4>
                 <div className='grid grid-cols-4 gap-2'>
                     {offer?.offerCards?.map((_node, _i) =>
-                        <ServiseCard image={_node.icon?.sourceUrl}>{_node.text}</ServiseCard>
+                        <ServiseCard key={_i} image={_node.icon?.sourceUrl}>{_node.text}</ServiseCard>
                     )}
                 </div>
             </div>
