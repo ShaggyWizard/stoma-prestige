@@ -29,8 +29,8 @@ export default function GallerySlider({ children, nodes }) {
             <Swiper ref={swiper} slidesPerView={3} spaceBetween={8} className="w-full h-[300px] overflow-visible">
                 {nodes?.map((node, i) =>
                     <SwiperSlide key={i} className="rounded-3xl overflow-hidden group">
-                        {node.image &&
-                            <Image className="object-cover duration-300 transition-transform group-hover:scale-[1.12]" fill src={node.image} alt="" />
+                        {node.sourceUrl &&
+                            <Image className="object-cover duration-300 transition-transform group-hover:scale-[1.12]" fill src={node.sourceUrl} alt="" />
                         }
                     </SwiperSlide>
                 )}

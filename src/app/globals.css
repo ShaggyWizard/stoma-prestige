@@ -97,3 +97,7 @@ body {
     list-style-type: disc;
     margin-left: 2rem;
 }
+.policy p {
+    margin-bottom: 12px;
+    break-inside: avoid-column;
+}

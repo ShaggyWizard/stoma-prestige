@@ -22,7 +22,7 @@ export default function RootLayout({ children }) {
         },
         {
             name: "Врачи",
-            link: "/staff",
+            link: "/doctors",
         },
         {
             name: "Отзывы",
@@ -38,7 +38,7 @@ export default function RootLayout({ children }) {
         },
         {
             name: "Контакты",
-            link: "/contacts",
+            link: "/#contacts",
         },
     ]
     return (

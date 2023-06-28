@@ -29,23 +29,29 @@ export default function ObjectSlider({ children, nodes }) {
             <Swiper ref={swiper} slidesPerView={2} spaceBetween={8} className="w-full h-[300px] overflow-visible">
                 {nodes?.map((node, i) =>
                     <SwiperSlide key={i}>
-                        <div className="rounded-3xl overflow-hidden flex justify-between group">
-                            <div className="w-[298px] h-[298px] shrink-0 relative">
-                                <div className="transition-opacity duration-300 bg-white opacity-80 group-hover:opacity-0 absolute inset-0 z-10" />
-                                {node.image &&
-                                    <Image fill src={node.image} alt="" />
-                                }
-                            </div>
-                            <div className="p-6 flex flex-col gap-2 flex-1">
-                                <p className="text-grey-2">Проблема и решение</p>
-                                <p >{node.problem}</p>
-                                <p className="text-grey-2">Врач</p>
-                                <p >{node.doctor}</p>
-                            </div>
-                        </div>
+                        <WorkCard node={node} />
                     </SwiperSlide>
                 )}
             </Swiper>
+        </div>
+    )
+}
+
+export function WorkCard({ node }) {
+    return (
+        <div className="rounded-3xl overflow-hidden flex justify-between group">
+            <div className="w-[298px] h-[298px] shrink-0 relative">
+                <div className="transition-opacity duration-300 bg-white opacity-80 group-hover:opacity-0 absolute inset-0 z-10" />
+                {node.image &&
+                    <Image fill src={node.image} alt="" />
+                }
+            </div>
+            <div className="p-6 flex flex-col gap-2 flex-1">
+                <p className="text-grey-2">Проблема и решение</p>
+                <p >{node.problem}</p>
+                <p className="text-grey-2">Врач</p>
+                <p >{node.doctor}</p>
+            </div>
         </div>
     )
 }

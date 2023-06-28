@@ -1,5 +1,6 @@
 "use client"
 
+import { FormatText } from "@/lib/textFormatter";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react"
 
@@ -10,9 +11,6 @@ export default function FaqCard({ node }) {
     const answerRef = useRef(null)
 
     const src = expanded ? "/icons/cross.svg" : "/icons/plus.svg"
-
-    console.log()
-
 
     useEffect(() => {
         let maxHeight = 48;
@@ -38,7 +36,9 @@ export default function FaqCard({ node }) {
                 <h5>{node.question}</h5>
                 <Image className="shrink-0" src={src} alt="" width={36} height={36} />
             </div>
-            <p className={`transition-opacity duration-500 ${expanded ? "opacity-100" : "opacity-0"}`} ref={answerRef}>{node.answer}</p>
+            <p className={`transition-opacity duration-500 ${expanded ? "opacity-100" : "opacity-0"}`} ref={answerRef}>
+                <FormatText numberClass='transition-colors hover:text-primary' text={node.answer} />
+            </p>
         </div>
     )
 }

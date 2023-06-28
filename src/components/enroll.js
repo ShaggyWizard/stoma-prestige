@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useState } from "react"
 import ReactInputMask from "react-input-mask"
 
-export default function Enroll() {
+export default function Enroll({id}) {
     const [name, setName] = useState("");
     const [number, setNumber] = useState("");
     const [consent, setConsent] = useState(false);
@@ -18,10 +18,10 @@ export default function Enroll() {
     const [consentStarted, setConsentStarted] = useState(false);
 
     return (
-        <div className='
-            container mx-auto flex flex-col gap-6 px-12 py-8 rounded-3xl
-            bg-gradient-to-r from-[#D72642] to-[#5554A9]
-        '>
+        <div id={id}
+            className='container mx-auto flex flex-col gap-6 px-12 py-8 rounded-3xl
+            bg-gradient-to-r from-[#D72642] to-[#5554A9]'
+        >
             <h3 className="text-white">Запись на прием</h3>
 
             <div className="flex gap-6">

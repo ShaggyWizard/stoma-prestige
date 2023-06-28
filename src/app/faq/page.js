@@ -1,99 +1,61 @@
-import Image from "next/image"
-import PriceList from "@/components/priceList"
-import Rassrochka from "@/components/rassrochka"
-import Enroll from "@/components/enroll"
+import FaqCard from "@/components/faqCard";
+import FormQuestion from "@/components/formQuestion";
+import client from "@/lib/apollo-client";
+import { gql } from "@apollo/client";
 
-export default function Home() {
-    const nodes = [
-        {
-            category: "Терапия",
-            menu: [
-                { name: "Лечение кариеса", price: "от 3 700 ₽" },
-                { name: "Лечение кариеса", price: "от 3 700 ₽" },
-                { name: "Лечение кариеса", price: "от 3 700 ₽" },
-                { name: "Лечение кариеса", price: "от 3 700 ₽" },
-                { name: "Лечение кариеса", price: "от 3 700 ₽" },
-                { name: "Лечение кариеса", price: "от 3 700 ₽" },
-                { name: "Лечение кариеса", price: "от 3 700 ₽" },
-            ],
+
+export const revalidate = 0;
+
+
+async function getData() {
+    const { data } = await client.query({
+        query: gql`
+        query Data {
+            faq {
+                faq_acf {
+                    faqNodes {
+                        question
+                        answer
+                    }
+                }
+            }
+        }
+    `,
+    });
+
+    return {
+        banner: {
+            title: "Вопрос-ответ",
+            text: "Мы понимаем, что лечение зубов - это ответственный процесс и у вас могут возникнуть вопросы. Вы можете записаться к нам на консультацию или задать свой вопрос здесь.",
         },
-        {
-            category: "Хирургия",
-            menu: [
-                { name: "Лечение кариеса", price: "от 3 700 ₽" },
-                { name: "Лечение кариеса", price: "от 3 700 ₽" },
-                { name: "Лечение кариеса", price: "от 3 700 ₽" },
-                { name: "Лечение кариеса", price: "от 3 700 ₽" },
-                { name: "Лечение кариеса", price: "от 3 700 ₽" },
-                { name: "Лечение кариеса", price: "от 3 700 ₽" },
-                { name: "Лечение кариеса", price: "от 3 700 ₽" },
-            ],
-        },
-        {
-            category: "Ортопедия",
-            menu: [
-                { name: "Лечение кариеса", price: "от 3 700 ₽" },
-                { name: "Лечение кариеса", price: "от 3 700 ₽" },
-                { name: "Лечение кариеса", price: "от 3 700 ₽" },
-                { name: "Лечение кариеса", price: "от 3 700 ₽" },
-                { name: "Лечение кариеса", price: "от 3 700 ₽" },
-                { name: "Лечение кариеса", price: "от 3 700 ₽" },
-                { name: "Лечение кариеса", price: "от 3 700 ₽" },
-            ],
-        },
-    ]
-
-
-    return (
-        <main>
-            <div className="flex flex-col gap-16 relative">
-                <div className="h-[393px] bg-[#F2F2F2] rounded-b-[48px] -z-10 absolute top-0 left-0 right-0" />
-
-                <div className="container mx-auto pt-[185px] grid grid-cols-2 gap-4">
-                    <h1>Услуги</h1>
-                    <h2>
-                        Мы предлагаем своим пациентам качественные услуги, работаем с современным оборудованием и материалами
-                    </h2>
-                </div>
-
-                <div className="container mx-auto grid grid-cols-3 gap-2">
-                    <FactCard>Первичная консультация - Бесплатно</FactCard>
-                    <FactCard>Лечение без боли</FactCard>
-                    <FactCard>Честные и прозрачные цены</FactCard>
-                </div>
-            </div>
-            <PriceList nodes={nodes} />
-
-            <div className="py-12 container mx-auto flex gap-12">
-                <a
-                    href="" target='_blank' rel="noopener noreferrer"
-                    className="
-                                bg-primary rounded-full px-4 py-3 flex gap-2 items-center 
-                                transition-colors hover:bg-primary-hover
-                                shrink-0 self-start
-                            "
-                >
-                    <Image width={24} height={24} src="/icons/document.svg" alt="" />
-                    <p className="font-medium text-white ">Скачать прайс-лист</p>
-                </a>
-                <p className="body2 text-grey-2">* Администрация клиники принимает все меры по своевременному обновлению размещенного на сайте прайс-листа, однако во избежание возможных недоразумений, советуем уточнять стоимость услуг в регистратуре по телефону +7 (914) 27-58-558. Окончательная стоимость будет рассчитана после консультации и плана лечения. Размещенный прайс не является офертой. Медицинские услуги оказываются на основании договора.</p>
-            </div>
-
-            <div className="py-12 container mx-auto flex gap-12">
-                <Rassrochka />
-            </div>
-            
-            <div className="py-12 container mx-auto flex gap-12">
-                <Enroll />
-            </div>
-        </main>
-    )
+        faq: data?.faq?.faq_acf?.faqNodes,
+    }
 }
 
-const FactCard = ({ children }) => {
+export default async function Home() {
+
+    const { banner, faq } = await getData();
+
     return (
-        <div className="p-6 rounded-3xl border border-grey-4 bg-white">
-            <p>{children}</p>
-        </div>
+        <main className="pt-[111px]">
+            <div className="h-[323px] bg-[#F2F2F2] rounded-b-[48px] -z-10 absolute top-0 left-0 right-0" />
+
+            <div className="container mx-auto flex flex-col">
+                <div className="container mx-auto flex gap-4 py-16">
+                    <h1 className="w-[425px] flex-shrink-0">{banner.title}</h1>
+                    <h5 className="flex-1">{banner.text}</h5>
+                </div>
+
+                <div className='grid grid-cols-2 gap-2 py-12'>
+                    {faq?.map((_node, _i) =>
+                        <FaqCard node={_node} key={_i} />
+                    )}
+                </div>
+
+                <div className="py-12">
+                    <FormQuestion />
+                </div>
+            </div>
+        </main>
     )
 }
