@@ -84,23 +84,26 @@ export default async function Page() {
 
 
     return (<main>
-        <div className="rounded-3xl bg-[#f2f2f2] pt-[111px] rounded-b-[48px] gap-12 py-16">
-            <div className="container my-16 mx-auto grid grid-cols-2 gap-4">
+        <div className=" bg-[#f2f2f2] pt-[75px] pb-6 main:pt-[111px] rounded-b-[48px]">
+            <div className="container mx-auto py-6 main:py-9 flex flex-col gap-2">
                 <h1>{banner.title}</h1>
                 <h5>{banner.text}</h5>
             </div>
-            <div className="container overflow-hidden grid grid-cols-3 mx-auto h-[300px] gap-2">
+            <div className="container overflow-hidden grid grid-cols-1 main:grid-cols-3 mx-auto h-[300px] gap-2">
                 {banner.images.slice(0, 3).map((_photo, _i) =>
-                    <div key={_i} className="relative rounded-3xl overflow-hidden">
+                    <div key={_i} className={`relative rounded-3xl overflow-hidden ${_i > 0 && "max-main:hidden"}`}>
                         <Image className="object-cover  hover:scale-110 transition-transform duration-300" alt="" fill src={_photo} />
                     </div>
 
                 )}
             </div>
         </div>
-        <div className="flex flex-col my-12 mx-auto container gap-12">
-            <h4>{data.subtitle3}</h4>
-            <div className=" grid grid-cols-2 gap-2">
+        <div className="flex flex-col mx-auto container
+            my-6 gap-6
+            main:my-12 main:gap-12
+        ">
+            <h3>{data.subtitle1}</h3>
+            <div className=" grid grid-cols-1 main:grid-cols-2 gap-2">
                 {doctors.map((_doctor, _i) =>
                     <NashDoctor key={_i} doctor={_doctor} buttonText={data.button1} />
                 )}

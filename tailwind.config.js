@@ -24,17 +24,12 @@ module.exports = {
 
         },
         screens: {
-            'mobile': '320px',
-            // => @media (min-width: 576px) { ... }
-
-            'desktop': '1248px',
-            // => @media (min-width: 960px) { ... }
+            'main': '1248px',
         },
         container: {
             padding: {
-                DEFAULT: '1rem',
-                'mobile': '1rem',
-                'desktop': '1.5rem',
+                DEFAULT: '1.5rem',
+                'main': '1.5rem',
             },
         },
     },

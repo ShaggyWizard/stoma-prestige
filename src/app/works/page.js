@@ -74,16 +74,22 @@ export default async function Home() {
     const { banner, cards, works } = await getData();
 
     return (
-        <main>
-            <div className="h-[502px] bg-[#F2F2F2] rounded-b-[48px] -z-10 absolute top-0 left-0 right-0" />
-            <div className="flex flex-col relative pt-[185px]">
-                <div className="container mx-auto flex flex-col gap-12 pb-6">
-                    <div className="container mx-auto flex gap-4">
-                        <h1 className="w-[425px] flex-shrink-0">{banner.title}</h1>
+        <main className="pt-[75px] main:pt-[111px]">
+            <div className="relative">
+                <div className=" bg-[#F2F2F2] rounded-b-[48px] -z-10 absolute inset-0 bottom-[72px] main:bottom-[144px]" />
+                <div className="container mx-auto flex flex-col pb-6
+                    gap-6 pt-6
+                    main:gap-12 main:pt-16 
+                ">
+                    <div className="container mx-auto flex gap-4 flex-col main:flex-row">
+                        <h1 className="main:w-[425px] flex-shrink-0">{banner.title}</h1>
                         <h5 className="flex-1">{banner.text}</h5>
                     </div>
 
-                    <div className="grid grid-cols-4 auto-rows-[minmax(0,_162px)] gap-4">
+                    <div className='grid gap-2 overflow-hidden
+                        grid-cols-2 auto-rows-[129px] max-main:h-[266px]
+                        main:grid-cols-4 main:auto-rows-[162px]
+                    '>
                         {cards.map((_node, _i) =>
                             <Fragment key={_i}>
                                 {_node.image ?
@@ -95,19 +101,25 @@ export default async function Home() {
                         )}
                     </div>
                 </div>
+            </div>
 
-                <div className='py-12 container mx-auto flex flex-col gap-12'>
-                    <h3>{works.title}</h3>
-                    <div className="grid grid-cols-2 gap-2">
-                        {works.cards.map((_node, _i) =>
-                            <WorkCard key={_i} node={_node} />
-                        )}
-                    </div>
+            <div className='container mx-auto flex flex-col
+                py-6 gap-6
+                main:py-12 main:gap-12
+            '>
+                <h3>{works.title}</h3>
+                <div className="grid grid-cols-1 main:grid-cols-2 gap-2">
+                    {works.cards.map((_node, _i) =>
+                        <WorkCard key={_i} node={_node} />
+                    )}
                 </div>
+            </div>
 
-                <div className='py-12 container mx-auto'>
-                    <Enroll />
-                </div>
+            <div className='container mx-auto
+                py-6
+                main:py-12
+            '>
+                <Enroll />
             </div>
         </main>
     )

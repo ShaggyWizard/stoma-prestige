@@ -6,6 +6,7 @@ import { useRef } from "react";
 
 export default function ReviewSlider({ children, nodes }) {
     const swiper = useRef(null);
+    const cols = window?.innerWidth < 1248 ? 'auto' : 3;
     return (
         <div className="flex flex-col gap-12 ">
             <div className="flex justify-between items-center">
@@ -26,7 +27,7 @@ export default function ReviewSlider({ children, nodes }) {
                 </div>
             </div>
 
-            <Swiper ref={swiper} style={{overflow:"visible"}} slidesPerView={3} spaceBetween={8} className="w-full h-[300px] overflow-visible">
+            <Swiper ref={swiper} style={{overflow:"visible"}} slidesPerView={cols} spaceBetween={8} className="review-slider w-full h-[300px] overflow-visible">
                 {nodes?.map((node, i) =>
                     <SwiperSlide key={i}>
                         <div className="rounded-3xl bg-white border border-grey-4 flex flex-col gap-6 p-6">

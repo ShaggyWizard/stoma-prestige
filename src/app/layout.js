@@ -2,6 +2,8 @@ import Footer from '@/components/footer';
 import Header from '@/components/header';
 import './globals.css'
 import 'swiper/css';
+import Head from 'next/head';
+import NextTopLoader from 'nextjs-toploader';
 
 
 export const metadata = {
@@ -43,7 +45,15 @@ export default function RootLayout({ children }) {
     ]
     return (
         <html lang="en">
+            <Head>
+                <meta name="viewport" content="viewport-fit=cover" />
+            </Head>
             <body>
+                <NextTopLoader
+                    color="#D72642"
+                    shadow="0 0 5px #BB132E"
+                    showSpinner={false}
+                />
                 <Header paths={paths} />
                 {children}
                 <Footer paths={paths} />

@@ -32,7 +32,7 @@ export default async function Home() {
             <div className="h-[306px] bg-[#F2F2F2] rounded-b-[48px] -z-10 absolute top-0 left-0 right-0" />
             <div className="pt-[111px] container mx-auto flex flex-col">
                 <h1 className="py-16">{title}</h1>
-                <div className="py-12 columns-2 policy" dangerouslySetInnerHTML={{ __html: text }} />
+                <div className="py-12 main:columns-2 policy" dangerouslySetInnerHTML={{ __html: text }} />
             </div>
         </main>
     )

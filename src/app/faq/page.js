@@ -37,16 +37,20 @@ export default async function Home() {
     const { banner, faq } = await getData();
 
     return (
-        <main className="pt-[111px]">
-            <div className="h-[323px] bg-[#F2F2F2] rounded-b-[48px] -z-10 absolute top-0 left-0 right-0" />
-
-            <div className="container mx-auto flex flex-col">
-                <div className="container mx-auto flex gap-4 py-16">
-                    <h1 className="w-[425px] flex-shrink-0">{banner.title}</h1>
+        <main className="pt-[75px] main:pt-[111px]">
+            <div className="container mx-auto relative flex flex-col">
+                <div className="bg-[#F2F2F2] rounded-b-[48px] -z-10 absolute inset-0" />
+                <div className="flex gap-4 py-6 main:py-16 
+                    flex-col
+                    main:flex-row
+                ">
+                    <h1 className="main:w-[425px] flex-shrink-0">{banner.title}</h1>
                     <h5 className="flex-1">{banner.text}</h5>
                 </div>
+            </div>
 
-                <div className='grid grid-cols-2 gap-2 py-12'>
+            <div className="container mx-auto flex flex-col">
+                <div className='grid grid-cols-1 main:grid-cols-2 gap-2 py-6 main:py-12'>
                     {faq?.map((_node, _i) =>
                         <FaqCard node={_node} key={_i} />
                     )}

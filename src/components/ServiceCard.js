@@ -2,10 +2,16 @@ import Image from "next/image";
 
 export default function ServiseCard({ image, altImage, children, animated = false }) {
     return (
-        <div className='rounded-3xl h-[220px] overflow-hidden group relative '>
-            <div className='absolute inset-0 p-6 flex flex-col justify-between z-20'>
+        <div className='rounded-3xl overflow-hidden group relative
+            h-[129px]
+            main:h-[220px]
+        '>
+            <div className='absolute inset-0 flex flex-col justify-between z-20
+                p-4
+                main:p-6
+            '>
                 <p className={`text-black ${animated ? "group-hover:text-white transition-all duration-500" : ""}`} >{children}</p>
-                <div className='self-end relative w-16 h-16' >
+                <div className='self-end relative w-16 h-16 max-main:w-12 max-main:h-12' >
                     {image &&
                         <Image fill src={image} alt="" className={animated && "opacity-100 group-hover:opacity-0 transition-all duration-500"} />
                     }

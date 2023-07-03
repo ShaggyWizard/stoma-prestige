@@ -13,11 +13,12 @@ export default function FaqCard({ node }) {
     const src = expanded ? "/icons/cross.svg" : "/icons/plus.svg"
 
     useEffect(() => {
-        let maxHeight = 48;
+        const padding = window?.innerWidth < 1248 ? 32 : 48;
+        let maxHeight = padding;
         if (questionRef.current)
             maxHeight += questionRef.current.clientHeight;
         if (answerRef.current && expanded)
-            maxHeight += answerRef.current.clientHeight + 48;
+            maxHeight += answerRef.current.clientHeight + padding;
 
         setMaxHeight(maxHeight);
     }, [expanded, questionRef, answerRef])
@@ -25,9 +26,11 @@ export default function FaqCard({ node }) {
     return (
         <div
             className={`
-                bg-white rounded-3xl p-6 border border-grey-4 flex flex-col gap-12
+                bg-white rounded-3xl border border-grey-4 flex flex-col 
                 transition-all duration-500 overflow-hidden
                 hover:bg-additional cursor-pointer
+                p-4 gap-6
+                main:p-6 main:gap-12
             `}
             style={{ maxHeight: maxHeight }}
             onClick={() => setExpanded(current => !current)}

@@ -2,8 +2,40 @@ import Image from "next/image"
 import PriceList from "@/components/priceList"
 import Rassrochka from "@/components/rassrochka"
 import Enroll from "@/components/enroll"
+import client from '@/lib/apollo-client'
+import { gql } from "@apollo/client"
 
-export default function Home() {
+export const revalidate = 0;
+
+async function getData() {
+    const { data } = await client.query({
+        query: gql`
+        query Data {
+          common {
+              credit_acf {
+                creditTitle
+                creditText
+                creditAdditionalText
+                creditIcons {
+                  icon {
+                    sourceUrl
+                  }
+                }
+              }
+            }
+        }
+    `,
+    });
+
+    return {
+        common: data.common,
+    }
+}
+
+export default async function Home() {
+
+    const { common } = await getData();
+
     const nodes = [
         {
             category: "Терапия",
@@ -45,18 +77,18 @@ export default function Home() {
 
 
     return (
-        <main>
-            <div className="flex flex-col gap-16 relative">
-                <div className="h-[393px] bg-[#F2F2F2] rounded-b-[48px] -z-10 absolute top-0 left-0 right-0" />
+        <main className="pt-[75px] main:pt-[111px]">
+            <div className="flex flex-col gap-6 main:gap-16 relative">
+                <div className="absolute inset-0 bottom-[27px] main:bottom-[35px] bg-[#F2F2F2] rounded-b-[48px] -z-10" />
 
-                <div className="container mx-auto pt-[185px] grid grid-cols-2 gap-4">
+                <div className="container mx-auto pt-6 main:pt-[74px] grid grid-cols-1 main:grid-cols-2 gap-4">
                     <h1>Услуги</h1>
                     <h2>
                         Мы предлагаем своим пациентам качественные услуги, работаем с современным оборудованием и материалами
                     </h2>
                 </div>
 
-                <div className="container mx-auto grid grid-cols-3 gap-2">
+                <div className="container mx-auto grid grid-cols-1 main:grid-cols-3 gap-2">
                     <FactCard>Первичная консультация - Бесплатно</FactCard>
                     <FactCard>Лечение без боли</FactCard>
                     <FactCard>Честные и прозрачные цены</FactCard>
@@ -64,7 +96,10 @@ export default function Home() {
             </div>
             <PriceList nodes={nodes} />
 
-            <div className="py-12 container mx-auto flex gap-12">
+            <div className="container mx-auto flex
+                flex-col py-6 gap-6
+                main:flex-row main:py-12 main:gap-12
+            ">
                 <a
                     href="" target='_blank' rel="noopener noreferrer"
                     className="
@@ -79,11 +114,14 @@ export default function Home() {
                 <p className="body2 text-grey-2">* Администрация клиники принимает все меры по своевременному обновлению размещенного на сайте прайс-листа, однако во избежание возможных недоразумений, советуем уточнять стоимость услуг в регистратуре по телефону +7 (914) 27-58-558. Окончательная стоимость будет рассчитана после консультации и плана лечения. Размещенный прайс не является офертой. Медицинские услуги оказываются на основании договора.</p>
             </div>
 
-            <div className="py-12 container mx-auto flex gap-12">
-                <Rassrochka />
+            <div className='py-6 main:py-12 container mx-auto'>
+                <Rassrochka data={common?.credit_acf} />
             </div>
-            
-            <div className="py-12 container mx-auto flex gap-12">
+
+            <div className="container mx-auto flex
+                py-6 gap-6
+                main:py-12 main:gap-12
+            ">
                 <Enroll />
             </div>
         </main>
@@ -92,7 +130,7 @@ export default function Home() {
 
 const FactCard = ({ children }) => {
     return (
-        <div className="p-6 rounded-3xl border border-grey-4 bg-white">
+        <div className="p-4 main:p-6 rounded-3xl border border-grey-4 bg-white">
             <p>{children}</p>
         </div>
     )

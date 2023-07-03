@@ -151,7 +151,7 @@ export default async function Home() {
     return (
         <main className="flex flex-col">
             <Banner data={data?.main_banner} />
-            <div className='py-12'>
+            <div className='py-6 main:py-12 container mx-auto'>
                 <Rassrochka data={common?.credit_acf} />
             </div>
             <NashiPreimushestva data={data?.advantages} />
@@ -159,7 +159,9 @@ export default async function Home() {
             <About data={data?.about} offer={common?.offer} />
             <NashaKlinika data={common?.gallery_acf} />
             <KakMyRabotaem data={works} />
-            <div className='py-12'>
+            <div className='container mx-auto 
+                py-6 main:py-12
+            '>
                 <Enroll id="enroll" />
             </div>
             <Faq data={faq} faq={faq} />
@@ -173,43 +175,58 @@ export default async function Home() {
 
 const Banner = ({ data }) => {
     return (
-        <div className="pt-[319px] flex flex-col gap-12 relative">
+        <div className="pt-[111px] relative">
+
+            {/* bg image */}
             <div className='w-full absolute top-0 h-[710px] rounded-b-[48px] overflow-hidden -z-10'>
                 <div className='absolute inset-0 bg-gradient-to-b from-[#6D4E40] to-[#29201C] z-10 opacity-80' />
                 {data?.bannerImage?.sourceUrl &&
-                    <Image src={data?.bannerImage?.sourceUrl} fill alt="" style={{ objectFit: "cover" }} />
+                    <Image src={data?.bannerImage?.sourceUrl} fill sizes="100vw" alt="" style={{ objectFit: "cover" }} />
                 }
             </div>
+
+            {/* bg grey */}
             <div className='w-full absolute top-0 h-[919px] rounded-b-[48px] bg-grey-4 -z-20' />
 
+            {/* content */}
+            <div className='container mx-auto pt-[208px] flex flex-col 
+                main:gap-12
+                max-main:gap-[38px]
+            '>
 
-            <div className='container mx-auto flex gap-16 text-white'>
-                <h1 className='w-[673px]'>{data?.bannerTitle}</h1>
-                <div className='flex-1 flex flex-col gap-6 py-[10px]'>
-                    <h2>{data?.bannerText}</h2>
-                    <Link href="" className='bg-primary rounded-full px-6 py-[13px] font-medium w-fit transition-colors hover:bg-primary-hover'>
-                        Записаться
-                    </Link>
-                </div>
-            </div>
-
-
-            <div className='container mx-auto grid grid-cols-5 gap-2 '>
-                {data?.bannerCards.map((_card, _i) =>
-                    <ServiseCard key={_i} animated={true} image={_card.icon?.sourceUrl} >{_card.text}</ServiseCard>
-                )}
-
-                <Link
-                    href="doctors"
-                    className='
-                        bg-primary rounded-3xl h-[220px] relative group overflow-hidden
-                    '
-                >
-                    <div className='absolute inset-0 p-6 flex flex-col justify-between z-20'>
-                        <p className='text-white'>Показать все</p>
+                <div className='flex max-main:flex-col max-main:gap-4 gap-16 text-white'>
+                    <h1 className='main:w-[673px]'>{data?.bannerTitle}</h1>
+                    <div className='flex-1 flex flex-col 
+                        max-main:gap-4
+                        main:gap-6 main:py-[10px]
+                    '>
+                        <h2>{data?.bannerText}</h2>
+                        <Link href="" className='bg-primary rounded-full px-6 py-[13px] font-medium w-fit transition-colors hover:bg-primary-hover'>
+                            Записаться
+                        </Link>
                     </div>
+                </div>
 
-                    <div className="
+
+                <div className='grid grid-cols-5 gap-2 max-main:grid-cols-2'>
+                    {data?.bannerCards.map((_card, _i) =>
+                        <ServiseCard key={_i} animated={true} image={_card.icon?.sourceUrl} >{_card.text}</ServiseCard>
+                    )}
+
+                    <Link
+                        href="doctors"
+                        className='
+                        bg-primary rounded-3xl relative group overflow-hidden
+                        
+                        main:h-[220px]
+                        max-main:h-[129px]
+                    '
+                    >
+                        <div className='absolute inset-0 p-6 flex flex-col justify-between z-20'>
+                            <p className='text-white'>Показать все</p>
+                        </div>
+
+                        <div className="
                         absolute rounded-full z-10
 
                         bg-transparent
@@ -224,8 +241,11 @@ const Banner = ({ data }) => {
                         group-hover:w-[320px] group-hover:h-[320px]
                         group-hover:-right-12 group-hover:-bottom-12
                     " />
-                </Link>
+                    </Link>
+                </div>
             </div>
+
+
         </div>
     )
 }
@@ -233,16 +253,27 @@ const Banner = ({ data }) => {
 
 const NashiPreimushestva = ({ data }) => {
     return (
-        <div className='container mx-auto flex flex-col gap-12 py-12'>
-            <div className='flex gap-12'>
+        <div className='container mx-auto flex flex-col 
+            gap-6 py-6
+            main:gap-12 main:py-12
+        '>
+            <div className='flex
+                flex-col gap-6
+                main:flex-row main:gap-12
+            '>
                 <h3 className='flex-1'>
                     <FormatText text={data?.advantagesTitle} />
                 </h3>
-                <h2 className='w-[539px] shrink-0 whitespace-pre-wrap'>
+                <h2 className='shrink-0 whitespace-pre-wrap
+                    main:w-[539px]
+                '>
                     <FormatText text={data?.advantagesText} />
                 </h2>
             </div>
-            <div className='grid grid-cols-4 auto-rows-[300px] gap-2 '>
+            <div className='grid gap-2 overflow-hidden
+                grid-cols-2 auto-rows-[129px] max-main:h-[266px]
+                main:grid-cols-4 main:auto-rows-[300px]
+            '>
                 {data?.advantagesCards?.map((_node, _i) =>
                     <Fragment key={_i}>
                         {_node.card?.image?.sourceUrl ?
@@ -258,7 +289,10 @@ const NashiPreimushestva = ({ data }) => {
 }
 const TextCard = ({ children }) => {
     return (
-        <div className='bg-white text-black p-6 rounded-3xl border border-grey-4'>
+        <div className='bg-white text-black rounded-3xl border border-grey-4
+            p-4
+            main:p-6
+        '>
             <h5>{children}</h5>
         </div>
     )
@@ -274,16 +308,25 @@ const ImageCard = ({ image }) => {
 
 const NashiVrachi = ({ data }) => {
     return (
-        <div className='container mx-auto flex flex-col gap-12 py-12'>
-            <div className='flex gap-12'>
+        <div className='container mx-auto flex flex-col
+            gap-6 py-6
+            main:gap-12 main:py-12
+        '>
+            <div className='flex
+                gap-6 flex-col
+                main:gap-12 main:flex-row
+            '>
                 <h3 className='flex-1'>
                     <FormatText text={data.title} />
                 </h3>
-                <h2 className='w-[539px] shrink-0 whitespace-pre-wrap'>
+                <h2 className='main:w-[539px] shrink-0 whitespace-pre-wrap'>
                     <FormatText text={data.text} />
                 </h2>
             </div>
-            <div className='grid grid-cols-2 auto-rows-[254px] gap-2'>
+            <div className='grid gap-2
+                grid-cols-1 auto-rows-[204px]
+                main:grid-cols-2 main:auto-rows-[254px]
+            '>
                 {data.nodes?.splice(0, 4)?.map((_node, _i) =>
                     <Doctor key={_i} name={_node.name} image={_node.image} />
                 )}
@@ -301,11 +344,14 @@ const Doctor = ({ name, image }) => {
     const src = image ? image : "/images/doctor-placeholder.png";
 
     return (
-        <div className='bg-white text-black p-6 rounded-3xl border border-additional flex gap-6 relative'>
+        <div className='bg-white text-black rounded-3xl border border-additional flex gap-6 relative
+            p-4
+            main:p-6
+        '>
             <div className='flex-1 flex flex-col gap-[10px]'>
                 <h5>{name}</h5>
                 <div className='flex-1'>
-                    <Link href="" className='
+                    <Link href="/doctors" className='
                         transition-colors  text-grey-2
                         hover:text-primary
                     '>
@@ -313,20 +359,26 @@ const Doctor = ({ name, image }) => {
                     </Link>
                 </div>
                 <a href="#enroll" className='
-                    font-medium rounded-full border px-6 py-[13px] w-fit
+                    font-medium rounded-full border px-6 py-4 w-fit
                     transition-colors border-primary text-primary
                     hover:border-primary-hover  hover:text-primary-hover
                 '>
                     Запись онлайн
                 </a>
             </div>
-            <Image
-                className='rounded-full z-[1]'
-                style={{ objectFit: "cover" }}
-                width={144} height={206}
-                src={src} alt=""
-                quality={100}
-            />
+            <div className='relative 
+                w-[120px] h-[172px]
+                main:w-[144px] main:h-[206px]
+            '>
+                <Image
+                    className='rounded-full z-[1]'
+                    style={{ objectFit: "cover" }}
+                    fill
+                    sizes="(max-width: 1248px) 120px, 144px"
+                    src={src} alt=""
+                    quality={100}
+                />
+            </div>
         </div>
     )
 }
@@ -334,14 +386,23 @@ const Doctor = ({ name, image }) => {
 
 const About = ({ data, offer }) => {
     return (
-        <div className='container mx-auto flex flex-col gap-12 py-12'>
-            <div className='flex gap-12'>
-                <h3 className='shrink-0 w-[280px]'>{data?.aboutTitle}</h3>
+        <div className='container mx-auto flex flex-col 
+            gap-6 py-6
+            main:gap-12 main:py-12
+        '>
+            <div className='flex
+                flex-col gap-6
+                main:flex-row main:gap-12
+            '>
+                <h3 className='shrink-0 main:w-[280px]'>{data?.aboutTitle}</h3>
                 <h5 className='whitespace-pre-wrap'>{data?.aboutText}</h5>
             </div>
             <div className='flex flex-col gap-4 '>
                 <h4>{offer?.offerText}</h4>
-                <div className='grid grid-cols-4 gap-2'>
+                <div className='grid gap-2
+                    grid-cols-2
+                    main:grid-cols-4
+                '>
                     {offer?.offerCards?.map((_node, _i) =>
                         <ServiseCard key={_i} image={_node.icon?.sourceUrl}>{_node.text}</ServiseCard>
                     )}
@@ -353,7 +414,10 @@ const About = ({ data, offer }) => {
 
 const NashaKlinika = ({ data }) => {
     return (
-        <div className='container mx-auto flex flex-col gap-12 py-12'>
+        <div className='container mx-auto flex flex-col 
+            gap-6 py-6
+            main:gap-12 main:py-12
+        '>
             <GallerySlider nodes={data?.galleryGallery}>
                 <h4>{data?.galleryTitle}</h4>
             </GallerySlider>
@@ -364,7 +428,10 @@ const NashaKlinika = ({ data }) => {
 
 const KakMyRabotaem = ({ data }) => {
     return (
-        <div className='container mx-auto flex flex-col gap-12 py-12'>
+        <div className='container mx-auto flex flex-col 
+            gap-6 py-6
+            main:gap-12 main:py-12
+        '>
             <ObjectSlider nodes={data.cards}>
                 <h3>{data.title}</h3>
             </ObjectSlider>
@@ -376,25 +443,30 @@ const KakMyRabotaem = ({ data }) => {
 const Faq = ({ faq }) => {
     let nodes = faq?.faq_acf?.faqNodes ? [...faq.faq_acf.faqNodes] : null;
     return (
-        <div className='container mx-auto flex flex-col gap-12 py-12'>
-            <div className="flex gap-12">
-                <h3 className='w-[280px] shrink-0'>Вопрос-ответ</h3>
+        <div className='container mx-auto flex flex-col 
+            gap-6 py-6
+            main:gap-12 main:py-12
+        '>
+            <div className="flex flex-col gap-6 main:flex-row main:gap-12">
+                <h3 className='main:w-[280px] shrink-0'>Вопрос-ответ</h3>
                 <h5>
                     Мы понимаем, что лечение зубов - это ответственный процесс и у вас могут возникнуть вопросы. Вы можете&nbsp;
                     <a href="#enroll" className='underline hover:text-primary'>записаться</a>&nbsp;к нам на консультацию или задать свой вопрос&nbsp;
                     <Link href="faq" className='underline  hover:text-primary'>здесь</Link>
                 </h5>
             </div>
-            <div className='grid grid-cols-2 gap-2'>
+            <div className='grid grid-cols-1 main:grid-cols-2 gap-2'>
                 {nodes?.splice(0, 3)?.map((_node, _i) =>
                     <FaqCard node={_node} key={_i} />
                 )}
                 <Link
                     href="faq"
                     className="
-                        bg-white rounded-3xl p-6 border border-grey-4 flex flex-col gap-12
+                        bg-white rounded-3xl border border-grey-4 flex
                         transition-colors duration-500 overflow-hidden
                         hover:bg-additional h-fit
+                        p-4
+                        main:p-6
                     "
                 >
                     <h5>Другие вопросы и ответы</h5>
@@ -424,7 +496,10 @@ const Reviews = () => {
         },
     ]
     return (
-        <div className='container mx-auto flex flex-col gap-12 overflow-visible pt-12'>
+        <div className='container mx-auto flex flex-col overflow-visible 
+            pt-6 gap-6
+            main:pt-12 main:gap-12
+        '>
             <ReviewSlider nodes={nodes}>
                 <h3>Отзывы</h3>
             </ReviewSlider>
@@ -453,10 +528,13 @@ const Contacts = () => {
         },
     ]
     return (
-        <div id="contacts" className='pt-12'>
+        <div id="contacts" className='pt-6 main:pt-12'>
             <div className='bg-gradient-to-r from-[#D72642] to-[#5554A9]'>
-                <div className="container mx-auto py-12 flex gap-6">
-                    <h3 className='w-[588px] shrink-0 text-white'>Запишитесь на бесплатную консультацию</h3>
+                <div className="container mx-auto flex gap-6
+                    py-6 flex-col
+                    main:py-12 main:flex-row
+                ">
+                    <h3 className='main:w-[588px] shrink-0 text-white'>Запишитесь на бесплатную консультацию</h3>
                     <div className='flex flex-col gap-4'>
                         {nodes.map((node, i) =>
                             <ContactItem key={i} node={node} />

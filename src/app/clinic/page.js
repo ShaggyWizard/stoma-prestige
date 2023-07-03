@@ -92,17 +92,17 @@ export default async function Page() {
 
     return (
         <main>
-            <div className=" bg-[#f2f2f2] pt-[111px] rounded-b-[48px]">
-                <div className="container mx-auto py-9 flex flex-col gap-2">
+            <div className=" bg-[#f2f2f2] pt-[75px] main:pt-[111px] rounded-b-[48px]">
+                <div className="container mx-auto py-6 main:py-9 flex flex-col gap-2">
                     <h1>{data.title}</h1>
                     <h5>{data.text1}</h5>
                     <h5>{data.text2}</h5>
                 </div>
             </div>
 
-            <div className="container mx-auto my-12">
+            <div className="container mx-auto my-6 main:my-12 flex flex-col gap-4">
                 <h4 className="font-bold">{wpData?.commmon?.offer?.offerText}</h4>
-                <div className="grid grid-cols-4 gap-2">
+                <div className="grid grid-cols-2 main:grid-cols-4 gap-2">
                     {wpData?.commmon?.offer?.offerCards?.map((_offer, _i) =>
                         <ServiseCard key={_i} image={_offer.icon?.sourceUrl}>{_offer.text}</ServiseCard>
                     )}
@@ -111,22 +111,28 @@ export default async function Page() {
 
             <NashaKlinika title={wpData?.commmon?.gallery_acf?.galleryTitle} nodes={wpData?.commmon?.gallery_acf?.galleryGallery}></NashaKlinika>
 
-            <div className="flex flex-col my-12 mx-auto container gap-12">
+            <div className="flex flex-col mx-auto container
+                py-6 gap-6
+                main:py-12 main:gap-12
+            ">
                 <h4>{data.subtitle3}</h4>
-                <div className=" grid grid-cols-3 gap-2">
+                <div className=" grid grid-cols-1 main:grid-cols-3 gap-2">
                     {wpData?.staff?.map((_person, _i) =>
                         <Person key={_i} person={_person} />
                     )}
                 </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-12 mx-auto py-12 container">
-                <div className="gap-12 flex flex-col">
+            <div className="grid mx-auto container
+                py-6 gap-6 grid-cols-1
+                main:py-12 main:gap-12 main:grid-cols-2
+            ">
+                <div className="flex flex-col gap-4 main:gap-6">
                     <h4>{data.subtitle4}</h4>
                     <div className="text-grey-1 underscorer" dangerouslySetInnerHTML={{ __html: data.text3 }}>
                     </div>
                 </div>
-                <div className="flex flex-col gap-6">
+                <div className="flex flex-col gap-4 main:gap-6">
                     <h4>{data.subtitle5}</h4>
                     {wpData.docs?.map((_node, _i) =>
                         <div key={_i} className="flex gap-6 px-6 py-4 bg-white rounded-3xl border border-pink-100">
@@ -160,7 +166,10 @@ const Person = ({ person }) => {
 }
 const NashaKlinika = ({ title, nodes }) => {
     return (
-        <div className='container mx-auto flex flex-col gap-12 py-12'>
+        <div className='container mx-auto flex flex-col 
+            gap-6 py-6
+            main:gap-12 main:py-12
+        '>
             <GallerySlider nodes={nodes}>
                 <h4>{title}</h4>
             </GallerySlider>

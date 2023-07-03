@@ -34,7 +34,7 @@ export default async function Home() {
                 <div className="bg-[#F2F2F2] rounded-b-[48px]">
                     <h1 className="py-16 container mx-auto">{title}</h1>
                 </div>
-                <div className="py-12 columns-2 policy container mx-auto" dangerouslySetInnerHTML={{ __html: text }} />
+                <div className="py-12 main:columns-2 policy container mx-auto" dangerouslySetInnerHTML={{ __html: text }} />
             </div>
         </main>
     )
