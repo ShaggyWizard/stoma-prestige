@@ -75,6 +75,7 @@ export default async function Home() {
 
     return (
         <main className="pt-[75px] main:pt-[111px]">
+            <div className="max-main:hidden absolute bg-[#f2f2f2] inset-x-0 top-0 h-[111px]" />
             <div className="relative">
                 <div className=" bg-[#F2F2F2] rounded-b-[48px] -z-10 absolute inset-0 bottom-[72px] main:bottom-[144px]" />
                 <div className="container mx-auto flex flex-col pb-6

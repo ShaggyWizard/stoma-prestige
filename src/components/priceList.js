@@ -2,10 +2,10 @@
 
 import { useEffect, useState } from "react"
 
-export default function PriceList({ nodes }) {
+export default function PriceList({ pricing }) {
     const [selectedCategory, selectCategory] = useState();
     useEffect(() => {
-        selectCategory(nodes[0]);
+        selectCategory(pricing[0]);
     }, [])
     return (
         <div className="flex container mx-auto 
@@ -13,26 +13,29 @@ export default function PriceList({ nodes }) {
             main:flex-row main:py-12 main:gap-12
         ">
             <div className="grid grid-cols-3 main:flex flex-col gap-2.5 main:w-[360px]">
-                {nodes.map((node, i) =>
-                    <button key={i} onClick={() => selectCategory(node)}
-                        className={`flex justify-center px-4 py-2 main:justify-start main:px-6 main:py-4 border rounded-full transition-colors ${selectedCategory?.category === node.category ? "border-grey-4" : "border-transparent"}`}
+                {pricing.map((_category, _i) =>
+                    <button key={_i} onClick={() => selectCategory(_category)}
+                        className={`flex justify-center px-4 py-2 main:justify-start main:px-6 main:py-4 border rounded-full transition-colors ${selectedCategory?.name === _category.name ? "border-grey-4" : "border-transparent"}`}
                     >
-                        {selectedCategory?.category === node.category ?
-                            <h5 className="text-primary text-center main:text-start">{node.category}</h5>
+                        {selectedCategory?.name === _category.name ?
+                            <h5 className="text-primary text-center main:text-start">{_category.name}</h5>
                             :
-                            <p className="text-center main:text-start">{node.category}</p>
+                            <p className="text-center main:text-start">{_category.name}</p>
                         }
                     </button>
                 )}
             </div>
-            <div className="flex flex-col gap-4 flex-1">
-                {selectedCategory?.menu?.map((node, i) =>
-                    <div key={i} className="flex justify-between items-center p-2 pl-6 border-b border-grey-4">
-                        <p>{node.name}</p>
-                        <p className="px-4 py-2 bg-additional rounded-full">{node.price}</p>
-                    </div>
-                )}
-            </div>
+
+            {pricing.map((_category, _i) =>
+                <div key={_i} className={`flex flex-col gap-4 flex-1 ${selectedCategory?.name === _category.name ? "" : "hidden"}`}>
+                    {_category.items?.map((_item, _j) =>
+                        <div key={_j} className="flex justify-between items-center p-2 pl-6 border-b border-grey-4">
+                            <p>{_item.name}</p>
+                            <p className="px-4 py-2 bg-additional rounded-full">{_item.price}</p>
+                        </div>
+                    )}
+                </div>
+            )}
         </div>
     )
 }

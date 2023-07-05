@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-export default function ServiseCard({ image, altImage, children, animated = false }) {
+export default function ServiseCard({ image, children, animated = false }) {
     return (
         <div className='rounded-3xl overflow-hidden group relative
             h-[129px]
@@ -13,10 +13,10 @@ export default function ServiseCard({ image, altImage, children, animated = fals
                 <p className={`text-black ${animated ? "group-hover:text-white transition-all duration-500" : ""}`} >{children}</p>
                 <div className='self-end relative w-16 h-16 max-main:w-12 max-main:h-12' >
                     {image &&
-                        <Image fill src={image} alt="" className={animated && "opacity-100 group-hover:opacity-0 transition-all duration-500"} />
+                        <Image fill src={image} alt="" className={animated && "opacity-100 group-hover:opacity-0 transition-all duration-500"}  />
                     }
-                    {(altImage && animated) &&
-                        <Image fill src={altImage} alt="" className="opacity-0 group-hover:opacity-100 transition-all duration-500" />
+                    {(animated) &&
+                        <Image fill src={image} alt="" className="opacity-0 group-hover:opacity-100 transition-all duration-500 filter brightness-0 invert"/>
                     }
                 </div>
             </div>

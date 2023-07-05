@@ -5,8 +5,7 @@ import Link from "next/link";
 import LogoMobile from "../../public/icons/logo-mobile.svg"
 import LogoDesktop from "../../public/icons/logo-desktop.svg"
 
-export default function Footer({ paths }) {
-
+export default function Footer({ paths, contacts }) {
     return (
         <footer className="bg-white py-10 main:py-20">
             <div className="container mx-auto flex flex-col gap-4 main:gap-6">
@@ -24,25 +23,25 @@ export default function Footer({ paths }) {
                     ">
                         <div className="flex gap-6 items-start">
                             <Image width={24} height={24} src="/icons/mail-red.svg" alt="" />
-                            <a href="mailto:stoma.prestige@yandex.ru" className="transition-colors hover:text-primary">
+                            <a href={contacts.email.link} className="transition-colors hover:text-primary">
                                 <h5>
-                                    stoma.prestige@yandex.ru
+                                    {contacts.email.text}
                                 </h5>
                             </a>
                         </div>
-                        <div className="flex gap-6 items-start">
+                        <a href={contacts.adress.link} className="flex gap-6 items-start">
                             <Image width={24} height={24} src="/icons/map-pin-red.svg" alt="" />
-                            <h5>Якутск, ул. Лермонтова, 23</h5>
-                        </div>
+                            <h5>{contacts.adress.text}</h5>
+                        </a>
                         <a
-                            href="https://wa.me/79142758558" target='_blank' rel="noopener noreferrer"
+                            href={contacts.whatsapp.link} target='_blank' rel="noopener noreferrer"
                             className="
                                 bg-primary rounded-full px-4 py-3 flex gap-2 items-center 
                                 transition-colors hover:bg-primary-hover
                             "
                         >
                             <Image width={24} height={24} src="/icons/whatsapp.svg" alt="" />
-                            <p className="font-medium text-white">+79142758558</p>
+                            <p className="font-medium text-white">{contacts.whatsapp.text}</p>
                         </a>
                     </div>
                 </div>

@@ -81,18 +81,12 @@ export default async function Page() {
         subtitle3: "Наша команда",
         subtitle4: "Сведения об организации",
         subtitle5: "Документы",
-
-        doctors: [
-            { name: "Вэш Ураган", role: "Человек стомостью в 60000000000$$", image: "/images/Vash.png" },
-            { name: "Найвс Миллионс", role: "Найвс", image: "/images/Knives.png" },
-            { name: "Николас Д. Вульфвуд", role: "Священник" },
-            // { name: "Мэрил Страйф", role: "Страховщик", image: "" },
-        ],
     }
 
     return (
-        <main>
-            <div className=" bg-[#f2f2f2] pt-[75px] main:pt-[111px] rounded-b-[48px]">
+        <main className="pt-[75px] main:pt-[111px]">
+            <div className="max-main:hidden absolute bg-[#f2f2f2] inset-x-0 top-0 h-[111px]" />
+            <div className=" bg-[#f2f2f2] rounded-b-[48px]">
                 <div className="container mx-auto py-6 main:py-9 flex flex-col gap-2">
                     <h1>{data.title}</h1>
                     <h5>{data.text1}</h5>

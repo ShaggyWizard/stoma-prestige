@@ -4,80 +4,21 @@ import Rassrochka from "@/components/rassrochka"
 import Enroll from "@/components/enroll"
 import client from '@/lib/apollo-client'
 import { gql } from "@apollo/client"
+import getPricingData from "@/lib/queries/getPricingData"
+import getCommonData from "@/lib/queries/getCommonData"
 
 export const revalidate = 0;
 
-async function getData() {
-    const { data } = await client.query({
-        query: gql`
-        query Data {
-          common {
-              credit_acf {
-                creditTitle
-                creditText
-                creditAdditionalText
-                creditIcons {
-                  icon {
-                    sourceUrl
-                  }
-                }
-              }
-            }
-        }
-    `,
-    });
-
-    return {
-        common: data.common,
-    }
-}
-
 export default async function Home() {
 
-    const { common } = await getData();
+    const commonData = await getCommonData();
+    const pricingData = getPricingData();
 
-    const nodes = [
-        {
-            category: "Терапия",
-            menu: [
-                { name: "Лечение кариеса", price: "от 3 700 ₽" },
-                { name: "Лечение кариеса", price: "от 3 700 ₽" },
-                { name: "Лечение кариеса", price: "от 3 700 ₽" },
-                { name: "Лечение кариеса", price: "от 3 700 ₽" },
-                { name: "Лечение кариеса", price: "от 3 700 ₽" },
-                { name: "Лечение кариеса", price: "от 3 700 ₽" },
-                { name: "Лечение кариеса", price: "от 3 700 ₽" },
-            ],
-        },
-        {
-            category: "Хирургия",
-            menu: [
-                { name: "Лечение кариеса", price: "от 3 700 ₽" },
-                { name: "Лечение кариеса", price: "от 3 700 ₽" },
-                { name: "Лечение кариеса", price: "от 3 700 ₽" },
-                { name: "Лечение кариеса", price: "от 3 700 ₽" },
-                { name: "Лечение кариеса", price: "от 3 700 ₽" },
-                { name: "Лечение кариеса", price: "от 3 700 ₽" },
-                { name: "Лечение кариеса", price: "от 3 700 ₽" },
-            ],
-        },
-        {
-            category: "Ортопедия",
-            menu: [
-                { name: "Лечение кариеса", price: "от 3 700 ₽" },
-                { name: "Лечение кариеса", price: "от 3 700 ₽" },
-                { name: "Лечение кариеса", price: "от 3 700 ₽" },
-                { name: "Лечение кариеса", price: "от 3 700 ₽" },
-                { name: "Лечение кариеса", price: "от 3 700 ₽" },
-                { name: "Лечение кариеса", price: "от 3 700 ₽" },
-                { name: "Лечение кариеса", price: "от 3 700 ₽" },
-            ],
-        },
-    ]
-
+    const [pricing, { common }] = await Promise.all([pricingData, commonData])
 
     return (
         <main className="pt-[75px] main:pt-[111px]">
+            <div className="max-main:hidden absolute bg-[#f2f2f2] inset-x-0 top-0 h-[111px]" />
             <div className="flex flex-col gap-6 main:gap-16 relative">
                 <div className="absolute inset-0 bottom-[27px] main:bottom-[35px] bg-[#F2F2F2] rounded-b-[48px] -z-10" />
 
@@ -94,7 +35,7 @@ export default async function Home() {
                     <FactCard>Честные и прозрачные цены</FactCard>
                 </div>
             </div>
-            <PriceList nodes={nodes} />
+            <PriceList pricing={pricing} />
 
             <div className="container mx-auto flex
                 flex-col py-6 gap-6

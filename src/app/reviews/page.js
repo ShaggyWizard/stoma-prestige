@@ -45,6 +45,7 @@ export default async function Home() {
 
     return (
         <main className="pt-[75px] main:pt-[111px] flex flex-col gap-6 main:gap-16">
+            <div className="max-main:hidden absolute bg-[#f2f2f2] inset-x-0 top-0 h-[111px]" />
             <div className="relative">
                 <div className="absolute inset-0 main:bottom-[226px] bg-[#F2F2F2] rounded-b-[48px] -z-10" />
                 <div className="container mx-auto flex gap-4 flex-col main:flex-row py-6 main:py-12">
@@ -76,7 +77,12 @@ export default async function Home() {
                 )}
             </div>
 
-            <Enroll />
+            <div className="container mx-auto flex
+                py-6 gap-6
+                main:py-12 main:gap-12
+            ">
+                <Enroll />
+            </div>
         </main>
     )
 } 

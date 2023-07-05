@@ -24,7 +24,7 @@ export default function Rassrochka({ data }) {
             </h5>
             <div className="absolute right-0 grid grid-cols-3
                 -bottom-2 w-full h-[85px]
-                main:bottom-0 main:w-[644] main:h-[151px]
+                main:bottom-0 main:w-[644px] main:h-[151px]
             ">
                 {data?.creditIcons?.map((_node, _i) =>
                     <BankCard key={_i} src={_node.icon?.sourceUrl} />

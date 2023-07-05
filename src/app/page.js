@@ -8,157 +8,38 @@ import ReviewSlider from '@/components/reviewSlider'
 import Map from '@/components/map'
 import Rassrochka from '@/components/rassrochka'
 import ServiseCard from '@/components/ServiceCard'
-import client from '@/lib/apollo-client'
-import { gql } from '@apollo/client'
 import { FormatText } from '@/lib/textFormatter'
 import { Fragment } from 'react'
+import getStaffData from '@/lib/queries/getStaffData'
+import getFaqData from '@/lib/queries/getFaqData'
+import getHomePageData from '@/lib/queries/getHomePageData'
+import getCommonData from '@/lib/queries/getCommonData'
+import getContactsData from '@/lib/queries/getContactsData'
 
 
 export const revalidate = 0;
 
 
-async function getData() {
-    const { data } = await client.query({
-        query: gql`
-        query Data {
-          page(id: "170", idType: DATABASE_ID) {
-            main_banner {
-              bannerTitle
-              bannerText
-              bannerImage {
-                sourceUrl
-              }
-              bannerCards {
-                text
-                icon {
-                  sourceUrl
-                }
-              }
-            }
-            advantages {
-              advantagesTitle
-              advantagesText
-              advantagesCards {
-                card {
-                  text
-                  image {
-                    sourceUrl
-                  }
-                }
-              }
-            }
-            about {
-              aboutTitle
-              aboutText
-            }
-          }
-          common {
-              offer {
-                offerText
-                offerCards {
-                  text
-                  icon {
-                    sourceUrl
-                  }
-                }
-              }
-              credit_acf {
-                creditTitle
-                creditText
-                creditAdditionalText
-                creditIcons {
-                  icon {
-                    sourceUrl
-                  }
-                }
-              }
-              gallery_acf {
-                galleryTitle
-                galleryGallery {
-                  sourceUrl
-                }
-              }
-              how_acf {
-                howTitle
-                howCards {
-                  problem
-                  doctor
-                  image {
-                    sourceUrl
-                  }
-                }
-              }
-            }
-            faq {
-                pageTitle
-                faq_acf {
-                  faqNodes {
-                    question
-                    answer
-                  }
-                }
-            }
-            staff {
-                staff {
-                    doctors {
-                        name
-                        role
-                        photo {
-                            sourceUrl
-                        }
-                    }
-                }
-            }
-        }
-    `,
-    });
-
-    const worksCards = []
-    data?.common?.how_acf?.howCards?.forEach(_card => {
-        worksCards.push({
-            problem: _card.problem,
-            doctor: _card.doctor,
-            image: _card.image?.sourceUrl,
-        });
-    });
-
-    let doctors = []
-    data?.staff?.staff?.doctors?.forEach(_doctor => {
-        doctors.push({ name: _doctor.name, role: _doctor.role, image: _doctor.photo?.sourceUrl });
-    });
-
-    return {
-        data: data.page,
-        common: data.common,
-        faq: data.faq,
-        works: {
-            title: data?.common?.how_acf?.howTitle,
-            cards: worksCards,
-        },
-        doctors: {
-            title: "Наши врачи",
-            text: "Наши врачи постоянно повышают квалификацию и развиваются в своей специализации",
-            nodes: doctors,
-        },
-    }
-}
-
-
 export default async function Home() {
+    const homePageData = await getHomePageData();
+    const staffData = await getStaffData();
+    const faqData = await getFaqData();
+    const commonData = await getCommonData();
+    const contactsData = await getContactsData();
 
-    const { data, common, faq, works, doctors } = await getData();
+    const [homePage, staff, faq, { works, common }, contacts] = await Promise.all([homePageData, staffData, faqData, commonData, contactsData])
 
     return (
         <main className="flex flex-col">
-            <Banner data={data?.main_banner} />
+            <Banner banner={homePage.banner} />
             <div className='py-6 main:py-12 container mx-auto'>
                 <Rassrochka data={common?.credit_acf} />
             </div>
-            <NashiPreimushestva data={data?.advantages} />
-            <NashiVrachi data={doctors} />
-            <About data={data?.about} offer={common?.offer} />
+            <NashiPreimushestva advantages={homePage.advantages} />
+            <NashiVrachi doctors={staff.doctors} text={homePage.doctors} />
+            <About about={homePage.about} offer={common?.offer} />
             <NashaKlinika data={common?.gallery_acf} />
-            <KakMyRabotaem data={works} />
+            <KakMyRabotaem works={works} />
             <div className='container mx-auto 
                 py-6 main:py-12
             '>
@@ -166,22 +47,22 @@ export default async function Home() {
             </div>
             <Faq data={faq} faq={faq} />
             <Reviews />
-            <Contacts />
+            <Contacts contacts={contacts} />
             <Map />
         </main>
     )
 }
 
 
-const Banner = ({ data }) => {
+const Banner = ({ banner }) => {
     return (
         <div className="pt-[111px] relative">
 
             {/* bg image */}
             <div className='w-full absolute top-0 h-[710px] rounded-b-[48px] overflow-hidden -z-10'>
                 <div className='absolute inset-0 bg-gradient-to-b from-[#6D4E40] to-[#29201C] z-10 opacity-80' />
-                {data?.bannerImage?.sourceUrl &&
-                    <Image src={data?.bannerImage?.sourceUrl} fill sizes="100vw" alt="" style={{ objectFit: "cover" }} />
+                {banner.image &&
+                    <Image src={banner.image} fill sizes="100vw" alt="" style={{ objectFit: "cover" }} />
                 }
             </div>
 
@@ -195,12 +76,12 @@ const Banner = ({ data }) => {
             '>
 
                 <div className='flex max-main:flex-col max-main:gap-4 gap-16 text-white'>
-                    <h1 className='main:w-[673px]'>{data?.bannerTitle}</h1>
+                    <h1 className='main:w-[673px]'>{banner.title}</h1>
                     <div className='flex-1 flex flex-col 
                         max-main:gap-4
                         main:gap-6 main:py-[10px]
                     '>
-                        <h2>{data?.bannerText}</h2>
+                        <h2>{banner.text}</h2>
                         <Link href="" className='bg-primary rounded-full px-6 py-[13px] font-medium w-fit transition-colors hover:bg-primary-hover'>
                             Записаться
                         </Link>
@@ -209,8 +90,8 @@ const Banner = ({ data }) => {
 
 
                 <div className='grid grid-cols-5 gap-2 max-main:grid-cols-2'>
-                    {data?.bannerCards.map((_card, _i) =>
-                        <ServiseCard key={_i} animated={true} image={_card.icon?.sourceUrl} >{_card.text}</ServiseCard>
+                    {banner.cards.map((_card, _i) =>
+                        <ServiseCard key={_i} animated={true} image={_card.image} >{_card.text}</ServiseCard>
                     )}
 
                     <Link
@@ -251,7 +132,7 @@ const Banner = ({ data }) => {
 }
 
 
-const NashiPreimushestva = ({ data }) => {
+const NashiPreimushestva = ({ advantages }) => {
     return (
         <div className='container mx-auto flex flex-col 
             gap-6 py-6
@@ -262,24 +143,24 @@ const NashiPreimushestva = ({ data }) => {
                 main:flex-row main:gap-12
             '>
                 <h3 className='flex-1'>
-                    <FormatText text={data?.advantagesTitle} />
+                    <FormatText text={advantages.title} />
                 </h3>
                 <h2 className='shrink-0 whitespace-pre-wrap
                     main:w-[539px]
                 '>
-                    <FormatText text={data?.advantagesText} />
+                    <FormatText text={advantages.text} />
                 </h2>
             </div>
             <div className='grid gap-2 overflow-hidden
                 grid-cols-2 auto-rows-[129px] max-main:h-[266px]
                 main:grid-cols-4 main:auto-rows-[300px]
             '>
-                {data?.advantagesCards?.map((_node, _i) =>
+                {advantages.cards.map((_node, _i) =>
                     <Fragment key={_i}>
-                        {_node.card?.image?.sourceUrl ?
-                            <ImageCard image={_node.card.image?.sourceUrl} />
+                        {_node.image ?
+                            <ImageCard image={_node.image} />
                             :
-                            <TextCard>{_node.card?.text}</TextCard>
+                            <TextCard>{_node.text}</TextCard>
                         }
                     </Fragment>
                 )}
@@ -306,7 +187,7 @@ const ImageCard = ({ image }) => {
 }
 
 
-const NashiVrachi = ({ data }) => {
+const NashiVrachi = ({ doctors, text }) => {
     return (
         <div className='container mx-auto flex flex-col
             gap-6 py-6
@@ -317,17 +198,17 @@ const NashiVrachi = ({ data }) => {
                 main:gap-12 main:flex-row
             '>
                 <h3 className='flex-1'>
-                    <FormatText text={data.title} />
+                    <FormatText text={text.title} />
                 </h3>
                 <h2 className='main:w-[539px] shrink-0 whitespace-pre-wrap'>
-                    <FormatText text={data.text} />
+                    <FormatText text={text.text} />
                 </h2>
             </div>
             <div className='grid gap-2
                 grid-cols-1 auto-rows-[204px]
                 main:grid-cols-2 main:auto-rows-[254px]
             '>
-                {data.nodes?.splice(0, 4)?.map((_node, _i) =>
+                {doctors?.splice(0, 4)?.map((_node, _i) =>
                     <Doctor key={_i} name={_node.name} image={_node.image} />
                 )}
             </div>
@@ -384,7 +265,7 @@ const Doctor = ({ name, image }) => {
 }
 
 
-const About = ({ data, offer }) => {
+const About = ({ about, offer }) => {
     return (
         <div className='container mx-auto flex flex-col 
             gap-6 py-6
@@ -394,8 +275,8 @@ const About = ({ data, offer }) => {
                 flex-col gap-6
                 main:flex-row main:gap-12
             '>
-                <h3 className='shrink-0 main:w-[280px]'>{data?.aboutTitle}</h3>
-                <h5 className='whitespace-pre-wrap'>{data?.aboutText}</h5>
+                <h3 className='shrink-0 main:w-[280px]'>{about.title}</h3>
+                <h5 className='whitespace-pre-wrap'>{about.text}</h5>
             </div>
             <div className='flex flex-col gap-4 '>
                 <h4>{offer?.offerText}</h4>
@@ -426,14 +307,14 @@ const NashaKlinika = ({ data }) => {
 }
 
 
-const KakMyRabotaem = ({ data }) => {
+const KakMyRabotaem = ({ works }) => {
     return (
         <div className='container mx-auto flex flex-col 
             gap-6 py-6
             main:gap-12 main:py-12
         '>
-            <ObjectSlider nodes={data.cards}>
-                <h3>{data.title}</h3>
+            <ObjectSlider nodes={works.cards}>
+                <h3>{works.title}</h3>
             </ObjectSlider>
         </div>
     )
@@ -508,25 +389,7 @@ const Reviews = () => {
 }
 
 
-const Contacts = () => {
-    const nodes = [
-        {
-            type: "adress",
-            text: "г. Якутск, ул.Лермонтова, д.23, оф 1"
-        },
-        {
-            type: "whatsapp",
-            text: "8 (914) 27-58-558"
-        },
-        {
-            type: "number",
-            text: "8 (924) 76-13-107"
-        },
-        {
-            type: "number",
-            text: "8 (4112) 22-58-58"
-        },
-    ]
+const Contacts = ({ contacts }) => {
     return (
         <div id="contacts" className='pt-6 main:pt-12'>
             <div className='bg-gradient-to-r from-[#D72642] to-[#5554A9]'>
@@ -536,20 +399,21 @@ const Contacts = () => {
                 ">
                     <h3 className='main:w-[588px] shrink-0 text-white'>Запишитесь на бесплатную консультацию</h3>
                     <div className='flex flex-col gap-4'>
-                        {nodes.map((node, i) =>
-                            <ContactItem key={i} node={node} />
+                        <ContactItem type="adress" link={contacts.adress.link} text={contacts.adress.text} />
+                        <ContactItem type="whatsapp" link={contacts.whatsapp.link} text={contacts.whatsapp.text} />
+                        {contacts.telephones.map((node, i) =>
+                            <ContactItem key={i} type="number" link={node.link} text={node.text} />
                         )}
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 
-const ContactItem = ({ node }) => {
+const ContactItem = ({ type, text, link }) => {
     let src = "/icons/phone.svg"
-    let href = node.href ? node.href : "";
-    switch (node.type) {
+    switch (type) {
         case "adress":
             src = "/icons/map-pin.svg"
             break;
@@ -561,11 +425,11 @@ const ContactItem = ({ node }) => {
             break;
     }
     return (
-        <a href={href} target='_blank' rel="noopener noreferrer"
+        <a href={link} target='_blank' rel="noopener noreferrer"
             className='flex gap-6 group'
         >
             <Image src={src} alt="" width={24} height={24} />
-            <h5 className='text-white transition-colors group-hover:text-additional'>{node.text}</h5>
+            <h5 className='text-white transition-colors group-hover:text-additional'>{text}</h5>
         </a>
     )
 }

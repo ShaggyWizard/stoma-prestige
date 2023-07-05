@@ -38,14 +38,17 @@ export default async function Home() {
 
     return (
         <main className="pt-[75px] main:pt-[111px]">
-            <div className="container mx-auto relative flex flex-col">
+            <div className="max-main:hidden absolute bg-[#f2f2f2] inset-x-0 top-0 h-[111px]" />
+            <div className="relative">
                 <div className="bg-[#F2F2F2] rounded-b-[48px] -z-10 absolute inset-0" />
-                <div className="flex gap-4 py-6 main:py-16 
+                <div className="container mx-auto flex flex-col">
+                    <div className="flex gap-4 py-6 main:py-16 
                     flex-col
                     main:flex-row
                 ">
-                    <h1 className="main:w-[425px] flex-shrink-0">{banner.title}</h1>
-                    <h5 className="flex-1">{banner.text}</h5>
+                        <h1 className="main:w-[425px] flex-shrink-0">{banner.title}</h1>
+                        <h5 className="flex-1">{banner.text}</h5>
+                    </div>
                 </div>
             </div>
 
