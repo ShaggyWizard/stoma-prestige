@@ -11,7 +11,10 @@ export default function CookieConsentWrapper() {
                 disableButtonStyles={true}
                 disableStyles={true}
                 buttonText="Согласиться"
-                buttonClasses="bg-white px-6 py-4 text-primary border border-primary rounded-full hover:border-primary-hover hover:text-primary-hover transition-colors"
+                buttonClasses="bg-white px-6 py-4 border border-primary rounded-full 
+                    transition-colors duration-500
+                    text-primary bg-transparent
+                    hover:text-white hover:bg-primary"
                 containerClasses="w-[674px] flex gap-[30px] bg-white rounded-3xl px-[33px] py-5"
                 style={{}}
                 contentClasses="flex items-center"

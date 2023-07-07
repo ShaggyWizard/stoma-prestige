@@ -4,19 +4,19 @@ export default function ServiseCard({ image, children, animated = false }) {
     return (
         <div className='rounded-3xl overflow-hidden group relative
             h-[129px]
-            main:h-[220px]
+            main:h-[220px] parent
         '>
             <div className='absolute inset-0 flex flex-col justify-between z-20
                 p-4
                 main:p-6
             '>
-                <p className={`text-black ${animated ? "group-hover:text-white transition-all duration-500" : ""}`} >{children}</p>
+                <p className={`text-black ${animated ? "group-[.parent]:group-hover:text-white transition-all duration-500" : ""}`} >{children}</p>
                 <div className='self-end relative w-16 h-16 max-main:w-12 max-main:h-12' >
                     {image &&
-                        <Image fill src={image} alt="" className={animated && "opacity-100 group-hover:opacity-0 transition-all duration-500"}  />
+                        <Image fill src={image} alt="" className={animated && "opacity-100 group-[.parent]:group-hover:opacity-0 transition-all duration-500"}  />
                     }
                     {(animated) &&
-                        <Image fill src={image} alt="" className="opacity-0 group-hover:opacity-100 transition-all duration-500 filter brightness-0 invert"/>
+                        <Image fill src={image} alt="" className="opacity-0 group-[.parent]:group-hover:opacity-100 transition-all duration-500 filter brightness-0 invert"/>
                     }
                 </div>
             </div>
@@ -32,10 +32,10 @@ export default function ServiseCard({ image, children, animated = false }) {
 
                     transition-all duration-500
 
-                    group-hover:bg-primary
-                    group-hover:opacity-100
-                    group-hover:w-[320px] group-hover:h-[320px]
-                    group-hover:-right-12 group-hover:-bottom-12
+                    group-[.parent]:group-hover:bg-primary
+                    group-[.parent]:group-hover:opacity-100
+                    group-[.parent]:group-hover:w-[320px] group-[.parent]:group-hover:h-[320px]
+                    group-[.parent]:group-hover:-right-12 group-[.parent]:group-hover:-bottom-12
                 " />
             }
 

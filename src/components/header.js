@@ -33,6 +33,9 @@ export default function Header({ paths }) {
                 w-full z-50 top-0 left-0 right-0
                 main:absolute 
                 max-main:fixed max-main:pointer-events-none
+                animate transition-all duration-500 delay-300
+                opacity-0 -translate-y-full blur-sm
+                [&.show]:opacity-100 [&.show]:translate-y-0 [&.show]:blur-0
             "
         >
             {/* mobile */}

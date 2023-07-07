@@ -12,6 +12,9 @@ export default function Footer({ paths, contacts }) {
                 <div className="flex 
                     flex-col items-start gap-6
                     main:flex-row main:items-center main:justify-between
+                    animate transition-all duration-500 delay-500
+                    opacity-0 translate-y-full blur-sm
+                    [&.show]:opacity-100 [&.show]:translate-y-0 [&.show]:blur-0
                 ">
                     <Link href="/">
                         <LogoMobile className={`max-main:hidden transition-colors duration-500 text-primary`} />
@@ -50,6 +53,9 @@ export default function Footer({ paths, contacts }) {
                 <div className="flex flex-wrap
                     gap-4
                     main:gap-8
+                    animate transition-all duration-500 delay-500
+                    opacity-0 translate-y-full blur-sm
+                    [&.show]:opacity-100 [&.show]:translate-y-0 [&.show]:blur-0
                 ">
                     {paths.map((node, i) =>
                         <Link key={i}
@@ -68,6 +74,9 @@ export default function Footer({ paths, contacts }) {
                 <div className="flex 
                     flex-col gap-16
                     main:flex-row main:justify-between
+                    animate transition-all duration-500 delay-500
+                    opacity-0 translate-y-full blur-sm
+                    [&.show]:opacity-100 [&.show]:translate-y-0 [&.show]:blur-0
                 ">
                     <p className="main:w-[714px] shrink-0 text-grey-2">
                         *Обращаем Ваше внимание на то, что данный сайт носит исключительно информационный характер и ни при каких условиях не является публичной офертой, определяемой положениями Статьи 437 Гражданского кодекса Российской Федерации.

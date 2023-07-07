@@ -24,6 +24,8 @@ export default function Enroll({ id }) {
             bg-gradient-to-r from-[#D72642] to-[#5554A9]
             px-6 py-4
             main:px-12 main:py-8
+            animate transition-all duration-1000 delay-[400ms]
+            [&.animate:not(.show)]:opacity-0 [&.animate:not(.show)]:translate-y-full
         '>
             <h3 className="text-white">Запись на прием</h3>
             <div className="flex flex-col items-center main:items-start main:flex-row gap-6">

@@ -2,12 +2,13 @@ import Footer from '@/components/footer';
 import Header from '@/components/header';
 import './globals.css'
 import 'swiper/css';
+import "animate.css/animate.min.css";
 import Head from 'next/head';
 import NextTopLoader from 'nextjs-toploader';
 import getContactsData from '@/lib/queries/getContactsData';
 import CookieConsentWrapper from '@/components/CookieConsentWrapper';
-import Image from 'next/image';
 import ButtonUp from '@/components/ButtonUp';
+import AnimationObserver from '@/lib/AnimationObserver';
 
 export const revalidate = 0;
 
@@ -59,6 +60,7 @@ export default async function RootLayout({ children }) {
                 <link rel="icon" href="/favicon.ico" sizes="any" />
             </Head>
             <body>
+                <AnimationObserver />
                 <NextTopLoader
                     color="#D72642"
                     shadow="0 0 5px #BB132E"

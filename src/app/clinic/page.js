@@ -21,6 +21,15 @@ async function getData() {
                     }
                   }
                 }
+                clinic_page_acf {
+                    cards {
+                      text
+                    }
+                    bannertext {
+                      text
+                    }
+                    info
+                }
             }
             common {
               offer {
@@ -54,22 +63,34 @@ async function getData() {
     `,
     });
 
+    const bannerText = []
+    data?.page?.clinic_page_acf?.bannertext?.forEach(_text => {
+        bannerText.push(_text.text);
+    });
+    const offer = []
+    data?.page?.clinic_page_acf?.cards?.forEach(_card => {
+        offer.push(_card);
+    });
+
     return {
         docs: data?.page?.docs?.nodes,
         commmon: data?.common,
-        staff: data?.staff?.staff?.management
+        staff: data?.staff?.staff?.management,
+        banner: {
+            title: "Клиника",
+            text: bannerText,
+        },
+        offer: offer,
+        info: data?.page?.clinic_page_acf?.info,
     };
 }
 
 
 export default async function Page() {
     const wpData = await getData()
+    console.log(wpData.banner)
 
     const data = {
-        title: "Клиника",
-        text1: "Стоматологическая клиника «Стома Престиж» работает в Якутске с ноября 2006 года и оказывает комплексные услуги по лечению зубов. С 2011 года клинику возглавляет Козлова Валентина Васильевна.",
-        text2: "В нашей клинике созданы все условия для того, чтобы вы чувствовали себя комфортно. Наша дружная команда профессионалов сделала сотни красивых улыбок, которые изменили жизнь пациентов к лучшему. Мы используем только современные технологии и материалы. Благодаря опыту наших врачей мы восстанавливаем здоровье ваших зубов даже в сложных случаях.",
-        text3: "<p>Стоматологическая клиника “Стома Престиж”<br />\nг. Якутск,  <a href=\"https://www.youtube.com/watch?v=g1mPqu7u39o&amp;ab_channel=REDGroup\">ул. Лермонтова, 23</a>, ​1 этаж​</p>\n<br />\n<ul>\n<li>Реквизиты</li>\n<li>Сведения об учредителях</li>\n</ul>\n",
         offers: [
             { text: "Гибкая система оплаты", image: "/icons/offers/icon1.svg" },
             { text: "Удобное время посещения", image: "/icons/offers/icon (1).svg" },
@@ -86,15 +107,25 @@ export default async function Page() {
     return (
         <main className="pt-[75px] main:pt-[111px]">
             <div className="max-main:hidden absolute bg-[#f2f2f2] inset-x-0 top-0 h-[111px]" />
-            <div className=" bg-[#f2f2f2] rounded-b-[48px]">
+            <div className=" bg-[#f2f2f2] rounded-b-[48px] animate group">
                 <div className="container mx-auto py-6 main:py-9 flex flex-col gap-2">
-                    <h1>{data.title}</h1>
-                    <h5>{data.text1}</h5>
-                    <h5>{data.text2}</h5>
+                    <h1 className="transition-all delay-[400ms] duration-1000
+                        group-[.animate:not(.show)]:opacity-0 group-[.animate:not(.show)]:translate-y-1/2">
+                        {wpData.banner.title}
+                    </h1>
+                    {wpData.banner.text?.map((_text, _i) =>
+                        <h5 key={_i} className="transition-all delay-[700ms] duration-1000
+                            group-[.animate:not(.show)]:opacity-0 group-[.animate:not(.show)]:translate-y-1/2">
+                            {_text}
+                        </h5>
+                    )}
                 </div>
             </div>
 
-            <div className="container mx-auto my-6 main:my-12 flex flex-col gap-4">
+            <div className="container mx-auto my-6 main:my-12 flex flex-col gap-4
+                animate transition-all delay-[400ms] duration-1000
+                [&:not(.show)]:opacity-0 [&:not(.show)]:translate-y-1/2"
+            >
                 <h4 className="font-bold">{wpData?.commmon?.offer?.offerText}</h4>
                 <div className="grid grid-cols-2 main:grid-cols-4 gap-2">
                     {wpData?.commmon?.offer?.offerCards?.map((_offer, _i) =>
@@ -108,11 +139,20 @@ export default async function Page() {
             <div className="flex flex-col mx-auto container
                 py-6 gap-6
                 main:py-12 main:gap-12
+                animate group
             ">
-                <h4>{data.subtitle3}</h4>
+                <h4 className="transition-all delay-[400ms] duration-1000
+                        group-[.animate:not(.show)]:opacity-0 group-[.animate:not(.show)]:translate-y-1/2"
+                >
+                    {data.subtitle3}
+                </h4>
                 <div className=" grid grid-cols-1 main:grid-cols-3 gap-2">
                     {wpData?.staff?.map((_person, _i) =>
-                        <Person key={_i} person={_person} />
+                        <div key={_i} className={`transition-all ${delay[_i * 3 + 6]} duration-1000
+                            group-[.animate:not(.show)]:opacity-0 group-[.animate:not(.show)]:translate-x-1/2`}
+                        >
+                            <Person person={_person} />
+                        </div>
                     )}
                 </div>
             </div>
@@ -120,16 +160,27 @@ export default async function Page() {
             <div className="grid mx-auto container
                 py-6 gap-6 grid-cols-1
                 main:py-12 main:gap-12 main:grid-cols-2
+                group animate
             ">
-                <div className="flex flex-col gap-4 main:gap-6">
+                <div className="flex flex-col gap-4 main:gap-6
+                    transition-all delay-[400ms] duration-1000
+                    group-[.animate:not(.show)]:opacity-0 group-[.animate:not(.show)]:translate-y-1/2
+                ">
                     <h4>{data.subtitle4}</h4>
-                    <div className="text-grey-1 underscorer" dangerouslySetInnerHTML={{ __html: data.text3 }}>
+                    <div className="text-grey-1 underscorer" dangerouslySetInnerHTML={{ __html: wpData.info }}>
                     </div>
                 </div>
                 <div className="flex flex-col gap-4 main:gap-6">
-                    <h4>{data.subtitle5}</h4>
+                    <h4 className="transition-all delay-[700ms] duration-1000
+                        group-[.animate:not(.show)]:opacity-0 group-[.animate:not(.show)]:translate-y-full
+                    ">
+                        {data.subtitle5}
+                    </h4>
                     {wpData.docs?.map((_node, _i) =>
-                        <div key={_i} className="flex gap-6 px-6 py-4 bg-white rounded-3xl border border-pink-100">
+                        <div key={_i} className={`flex gap-6 px-6 py-4 bg-white rounded-3xl border border-pink-100
+                            transition-all ${delay[_i * 3 + 10]} duration-1000
+                            group-[.animate:not(.show)]:opacity-0 group-[.animate:not(.show)]:translate-x-1/2`}
+                        >
                             <Image width={24} height={24} src="/icons/docIcon.svg" alt="" />
                             <a href={_node.file?.sourceUrl} target="_blank" rel="noopener noreferrer">{_node.name}</a>
                         </div>
@@ -170,3 +221,57 @@ const NashaKlinika = ({ title, nodes }) => {
         </div>
     )
 }
+
+
+const delay = [
+    "delay-[0ms]",
+    "delay-[100ms]",
+    "delay-[200ms]",
+    "delay-[300ms]",
+    "delay-[400ms]",
+    "delay-[500ms]",
+    "delay-[600ms]",
+    "delay-[700ms]",
+    "delay-[800ms]",
+    "delay-[900ms]",
+    "delay-[1000ms]",
+    "delay-[1100ms]",
+    "delay-[1200ms]",
+    "delay-[1300ms]",
+    "delay-[1400ms]",
+    "delay-[1500ms]",
+    "delay-[1600ms]",
+    "delay-[1700ms]",
+    "delay-[1800ms]",
+    "delay-[1900ms]",
+    "delay-[2000ms]",
+    "delay-[2100ms]",
+    "delay-[2200ms]",
+    "delay-[2300ms]",
+    "delay-[2400ms]",
+    "delay-[2500ms]",
+    "delay-[2600ms]",
+    "delay-[2700ms]",
+    "delay-[2800ms]",
+    "delay-[2900ms]",
+    "delay-[3000ms]",
+    "delay-[3100ms]",
+    "delay-[3200ms]",
+    "delay-[3300ms]",
+    "delay-[3400ms]",
+    "delay-[3500ms]",
+    "delay-[3600ms]",
+    "delay-[3700ms]",
+    "delay-[3800ms]",
+    "delay-[3900ms]",
+    "delay-[4000ms]",
+    "delay-[4100ms]",
+    "delay-[4200ms]",
+    "delay-[4300ms]",
+    "delay-[4400ms]",
+    "delay-[4500ms]",
+    "delay-[4600ms]",
+    "delay-[4700ms]",
+    "delay-[4800ms]",
+    "delay-[4900ms]",
+]

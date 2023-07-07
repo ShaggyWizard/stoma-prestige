@@ -7,7 +7,7 @@ module.exports = {
     ],
     theme: {
         fontFamily: {
-            'blblbl': ['"Comic Sans MS"',  '"Comic Sans"'],
+            'blblbl': ['"Comic Sans MS"', '"Comic Sans"'],
         },
         extend: {
             colors: {
@@ -21,7 +21,6 @@ module.exports = {
                 'grey-4': '#E4E4E4',
                 'white': '#FFFFFF',
             },
-
         },
         screens: {
             'main': '1248px',
