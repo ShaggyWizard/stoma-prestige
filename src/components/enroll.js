@@ -27,7 +27,7 @@ export default function Enroll({ id }) {
             animate transition-all duration-1000 delay-[400ms]
             [&.animate:not(.show)]:opacity-0 [&.animate:not(.show)]:translate-y-full
         ">
-            <div className={`absolute inset-0 flex items-center justify-center transition-all delay-300 duration-1000 ${success ? "" : "-translate-y-40 opacity-0"}`}>
+            <div className={`absolute inset-0 flex items-center justify-center transition-all delay-300 duration-1000 pointer-events-none ${success ? "" : "-translate-y-40 opacity-0"}`}>
                 <h5 className="text-white">Ваша заявка успешно отправлена! Мы свяжемся с вами в ближайшее время</h5>
             </div>
             <form onSubmit={handleSubmit(onSubmit)} id={id}

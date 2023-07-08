@@ -34,7 +34,7 @@ export default function ModalEnroll() {
                         transition-all duration-700
                         group-[:not(.show)]:translate-y-full
                 '>
-                <div className={`container mx-auto absolute inset-0 flex items-center justify-center transition-all delay-300 duration-1000 ${success ? "" : "-translate-y-40 opacity-0 pointer-events-none"}`}>
+                <div className={`container mx-auto absolute inset-0 flex items-center justify-center transition-all delay-300 duration-1000 pointer-events-none ${success ? "" : "-translate-y-40 opacity-0"}`}>
                     <h5 className="text-white">Ваша заявка успешно отправлена! Мы свяжемся с вами в ближайшее время</h5>
                 </div>
                 <form onSubmit={handleSubmit(onSubmit)} className={`flex flex-col gap-6 pt-4 pb-16

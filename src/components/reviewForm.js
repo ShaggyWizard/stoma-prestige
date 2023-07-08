@@ -35,7 +35,7 @@ export default function ReviewForm() {
 
     return (
         <div className="relative">
-            <div className={`absolute w-full top-0 flex justify-center transition-all delay-300 duration-1000 ${success ? "" : "-translate-y-40 opacity-0"}`}>
+            <div className={`absolute w-full top-0 flex justify-center transition-all delay-300 duration-1000 pointer-events-none ${success ? "" : "-translate-y-40 opacity-0"}`}>
                 <h5>Спасибо за ваш отзыв!</h5>
             </div>
             <form onSubmit={handleSubmit(onSubmit)} className={`flex flex-col gap-6 transition-all delay-300 duration-1000 ${success ? "translate-y-40 opacity-0" : ""}`}>
