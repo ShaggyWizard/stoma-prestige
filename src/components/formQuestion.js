@@ -24,7 +24,7 @@ export default function FormQuestion() {
     return (
         <div className="px-6 py-4 main:px-12 main:py-8 rounded-3xl overflow-hidden 
             bg-gradient-to-r from-[#D72642] to-[#5554A9] relative">
-            <div className={`absolute inset-0 flex justify-center transition-all delay-300 duration-1000 ${success ? "" : "-translate-y-40 opacity-0"}`}>
+            <div className={`absolute inset-0 flex justify-center transition-all delay-300 duration-1000 pointer-events-none ${success ? "" : "-translate-y-40 opacity-0"}`}>
                 <h5 className="text-white flex justify-center items-center">Ваше сообщение принято!</h5>
             </div>
             <form onSubmit={handleSubmit(onSubmit)} className={`flex flex-col gap-6transition-all delay-300 duration-1000 ${success ? "translate-y-40 opacity-0" : ""}`}>
