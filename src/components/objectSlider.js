@@ -2,11 +2,10 @@
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import Image from "next/image";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
 export default function ObjectSlider({ children, nodes }) {
     const swiper = useRef(null);
-    const cols = window?.innerWidth < 1248 ? 1 : 2;
 
     return (
         <div className="flex flex-col gap-6 main:gap-12 group animate">
@@ -30,8 +29,18 @@ export default function ObjectSlider({ children, nodes }) {
                 </div>
             </div>
 
-            <Swiper ref={swiper} slidesPerView={cols} spaceBetween={8} style={{overflow: "visible"}}
-                className="w-full h-[236px] main:h-[300px] transition-all duration-1000 delay-[800ms]
+            <Swiper ref={swiper} slidesPerView={1} spaceBetween={8} style={{overflow: "visible"}}
+                className="main:hidden w-full h-[236px] main:h-[300px] transition-all duration-1000 delay-[800ms]
+                group-[.animate:not(.show)]:opacity-0 group-[.animate:not(.show)]:translate-y-1/2" 
+            >
+                {nodes?.map((node, i) =>
+                    <SwiperSlide key={i}>
+                        <WorkCard node={node} />
+                    </SwiperSlide>
+                )}
+            </Swiper>
+            <Swiper ref={swiper} slidesPerView={2} spaceBetween={8} style={{overflow: "visible"}}
+                className="max-main:hidden w-full h-[236px] main:h-[300px] transition-all duration-1000 delay-[800ms]
                 group-[.animate:not(.show)]:opacity-0 group-[.animate:not(.show)]:translate-y-1/2" 
             >
                 {nodes?.map((node, i) =>

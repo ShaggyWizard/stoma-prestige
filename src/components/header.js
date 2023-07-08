@@ -12,7 +12,7 @@ export default function Header({ paths }) {
 
     const [visible, setVisible] = useState(true);
     const [showMenu, setShowMenu] = useState(false);
-    const [position, setPosition] = useState(window?.scrollY);
+    const [position, setPosition] = useState();
 
     useEffect(() => {
         const handleScroll = () => {
