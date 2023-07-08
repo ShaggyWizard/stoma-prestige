@@ -3,6 +3,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import Image from "next/image";
 import { useRef, useState } from "react";
+import { Autoplay } from "swiper";
 
 export default function GallerySlider({ children, nodes }) {
     const swiper = useRef(null);
@@ -13,7 +14,7 @@ export default function GallerySlider({ children, nodes }) {
             <div className="flex justify-between items-center 
             transition-all duration-1000 delay-[400ms]
             group-[.animate:not(.show)]:opacity-0 group-[.animate:not(.show)]:translate-y-full"
-        >
+            >
                 <div>
                     {children &&
                         <>
@@ -31,7 +32,7 @@ export default function GallerySlider({ children, nodes }) {
                 </div>
             </div>
 
-            <Swiper ref={swiper} slidesPerView={cols} spaceBetween={8} style={{overflow: "visible"}}
+            <Swiper ref={swiper} slidesPerView={cols} spaceBetween={8} modules={[Autoplay]}  autoplay={{ delay: 2500, disableOnInteraction: false, }} style={{ overflow: "visible" }}
                 className="w-full h-[179px] main:h-[300px] transition-all duration-1000 delay-[800ms]
                 group-[.animate:not(.show)]:opacity-0 group-[.animate:not(.show)]:translate-y-1/2"
             >

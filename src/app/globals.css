@@ -23,7 +23,6 @@
 
 html {
     overflow: -moz-scrollbars-vertical; 
-    overflow-y: scroll;
     scroll-behavior: smooth;
 }
 
@@ -92,8 +91,9 @@ body {
     text-align: left;
     color: #141515;
     text-decoration-skip-ink: none;
-    overflow-x: hidden;
     position: relative;
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
 
 .underscorer a {

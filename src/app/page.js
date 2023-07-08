@@ -15,6 +15,8 @@ import getFaqData from '@/lib/queries/getFaqData'
 import getHomePageData from '@/lib/queries/getHomePageData'
 import getCommonData from '@/lib/queries/getCommonData'
 import getContactsData from '@/lib/queries/getContactsData'
+import ModalButton from '@/components/ModalButton'
+import getReviewsData from '@/lib/queries/getReviewsData'
 
 
 export const revalidate = 0;
@@ -26,8 +28,10 @@ export default async function Home() {
     const faqData = await getFaqData();
     const commonData = await getCommonData();
     const contactsData = await getContactsData();
+    const reviewsData = await getReviewsData();
+    
 
-    const [homePage, staff, faq, { works, common }, contacts] = await Promise.all([homePageData, staffData, faqData, commonData, contactsData])
+    const [homePage, staff, faq, { works, common }, contacts, reviews] = await Promise.all([homePageData, staffData, faqData, commonData, contactsData, reviewsData])
 
     return (
         <main className="flex flex-col">
@@ -46,7 +50,7 @@ export default async function Home() {
                 <Enroll id="enroll" />
             </div>
             <Faq data={faq} faq={faq} />
-            <Reviews />
+            <Reviews reviews={reviews} />
             <Contacts contacts={contacts} />
             <div className='animate transition-all duration-1000 delay-[400ms]
                 [&.animate:not(.show)]:opacity-0 [&.animate:not(.show)]:translate-y-1/2'
@@ -114,9 +118,9 @@ const Banner = ({ banner }) => {
                             group-[.banner-block.show]:opacity-100 group-[.banner-block.show]:translate-y-0
                             py-[13px] 
                         ">
-                            <Link href="" className='bg-primary rounded-full px-6 py-[13px] font-medium w-fit transition-colors hover:bg-primary-hover'>
+                            <ModalButton className='bg-primary rounded-full px-6 py-[13px] font-medium w-fit transition-colors hover:bg-primary-hover' >
                                 Записаться
-                            </Link>
+                            </ModalButton>
                         </div>
                     </div>
                 </div>
@@ -319,7 +323,7 @@ const Doctor = ({ name, image }) => {
                         подробнее
                     </Link>
                 </div>
-                <a href="#enroll" className='
+                <ModalButton className='
                     font-medium rounded-full border px-6 py-4 w-fit
                     border-primary
                     transition-colors duration-500
@@ -327,7 +331,7 @@ const Doctor = ({ name, image }) => {
                     hover:text-white hover:bg-primary
                 '>
                     Запись онлайн
-                </a>
+                </ModalButton>
             </div>
             <div className='relative 
                 w-[120px] h-[172px]
@@ -431,7 +435,7 @@ const Faq = ({ faq }) => {
                 <h5 className='transition-all duration-1000 delay-[700ms]
                 group-[.animate:not(.show)]:opacity-0 group-[.animate:not(.show)]:translate-y-full'>
                     Мы понимаем, что лечение зубов - это ответственный процесс и у вас могут возникнуть вопросы. Вы можете&nbsp;
-                    <a href="#enroll" className='underline hover:text-primary'>записаться</a>&nbsp;к нам на консультацию или задать свой вопрос&nbsp;
+                    <ModalButton className='underline hover:text-primary'>записаться</ModalButton>&nbsp;к нам на консультацию или задать свой вопрос&nbsp;
                     <Link href="faq" className='underline  hover:text-primary'>здесь</Link>
                 </h5>
             </div>
@@ -457,31 +461,13 @@ const Faq = ({ faq }) => {
     )
 }
 
-const Reviews = () => {
-    const nodes = [
-        {
-            text: "Спасибо огромное, доктору Афанасию Афанасьевичу за его золотые руки, мастер своего дела. Хожу в эту клинику очень давно, рекомендую всем.",
-            name: "Татьяна",
-        },
-        {
-            text: "Заехал по дороге на работу без записи с острой боли, нашли окошку приняли без вопросов.Лечение без боли все высшем уровне! Афанасий врач большой профи.рекомендую.спасибо",
-            name: "Ньургун",
-        },
-        {
-            text: "Спасибо большое Сергею Витальевичу за профессиональное безболезненное лечение .Всем советую 👍🏾",
-            name: "Яна",
-        },
-        {
-            text: "Хочу поблагодарить врача Федорову Альбину Кимовну за профессионализм, очень довольна лечением! Также хочу отметить коллектив, очень вежливый и приятный!",
-            name: "Елена",
-        },
-    ]
+const Reviews = ( {reviews}) => {
     return (
         <div className='container mx-auto flex flex-col overflow-visible 
             pt-6 gap-6
             main:pt-12 main:gap-12
         '>
-            <ReviewSlider nodes={nodes}>
+            <ReviewSlider nodes={reviews}>
                 <h3>Отзывы</h3>
             </ReviewSlider>
         </div>

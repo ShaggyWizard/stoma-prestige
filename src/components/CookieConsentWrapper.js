@@ -22,7 +22,7 @@ export default function CookieConsentWrapper() {
             >
                 <p>
                     Этот сайт использует файлы cookies. Продолжая использовать наш сайт, вы автоматически соглашаетесь с&nbsp;
-                    <Link href="agreement" className="underline text-primary transition-colors hover:text-primary-hover">Пользовательским соглашением</Link>
+                    <Link href="policy" className="underline text-primary transition-colors hover:text-primary-hover">Пользовательским соглашением</Link>
                 </p>
             </CookieConsent>
         </div>

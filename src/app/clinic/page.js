@@ -77,7 +77,7 @@ async function getData() {
         commmon: data?.common,
         staff: data?.staff?.staff?.management,
         banner: {
-            title: "Клиника",
+            title: "О нас",
             text: bannerText,
         },
         offer: offer,

@@ -1,3 +1,4 @@
+import ModalButton from "@/components/ModalButton";
 import FaqCard from "@/components/faqCard";
 import FormQuestion from "@/components/formQuestion";
 import client from "@/lib/apollo-client";
@@ -51,7 +52,10 @@ export default async function Home() {
                         ">{banner.title}</h1>
                         <h5 className="flex-1 transition-all delay-[700ms] duration-1000
                                 group-[.animate:not(.show)]:opacity-0 group-[.animate:not(.show)]:translate-y-1/2
-                        ">{banner.text}</h5>
+                        ">
+                            Мы понимаем, что лечение зубов - это ответственный процесс и у вас могут возникнуть вопросы. Вы можете&nbsp;
+                            <ModalButton className='underline hover:text-primary'>записаться</ModalButton>&nbsp;к нам на консультацию или задать свой вопрос здесь
+                        </h5>
                     </div>
                 </div>
             </div>

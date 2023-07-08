@@ -82,8 +82,8 @@ export default function Footer({ paths, contacts }) {
                         *Обращаем Ваше внимание на то, что данный сайт носит исключительно информационный характер и ни при каких условиях не является публичной офертой, определяемой положениями Статьи 437 Гражданского кодекса Российской Федерации.
                     </p>
                     <div className="flex flex-col gap-2 items-end">
-                        <Link href="policy" className="text-grey-2 transition-colors hover:text-primary">Политика конфиденциальности</Link>
-                        <Link href="agreement" className="text-grey-2 transition-colors hover:text-primary">Пользовательское соглашение</Link>
+                        <Link href="privacy" className="text-grey-2 transition-colors hover:text-primary">Политика конфиденциальности</Link>
+                        <Link href="policy" className="text-grey-2 transition-colors hover:text-primary">Пользовательское соглашение</Link>
                         <p className="text-grey-2">2023 (с) Все права защищены</p>
                     </div>
                 </div>

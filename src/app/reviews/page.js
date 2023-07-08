@@ -1,8 +1,7 @@
 import Enroll from "@/components/enroll";
 import ReviewForm from "@/components/reviewForm";
-import client from "@/lib/apollo-client";
+import getReviewsData from "@/lib/queries/getReviewsData";
 import { FormatText } from "@/lib/textFormatter"
-import { gql } from "@apollo/client";
 import Image from "next/image"
 
 
@@ -10,24 +9,11 @@ export const revalidate = 0;
 
 
 async function getData() {
-    const { data } = await client.query({
-        query: gql`
-        query Data {
-            reviews {
-                reviews {
-                    nodes {
-                        name
-                        text
-                    }
-                }
-            }
-        }
-    `,
-    });
+    const data = await getReviewsData();
 
 
     return {
-        reviews: data?.reviews?.reviews?.nodes,
+        reviews: data,
         banner: {
             title: "Отзывы",
             text: "Мы очень внимательно относимся к каждому отзыву и делаем все возможное, чтобы визит в нашу клинику оставил у вас положительные эмоции. Ваши отзывы помогают нам становиться лучше!",
@@ -59,6 +45,7 @@ export default async function Home() {
                 <div className="container mx-auto grid gap-6 bg-additional rounded-3xl
                     px-6 py-4 grid-cols-1
                     main:px-12 main:py-8 main:grid-cols-2
+                    overflow-hidden
                     transition-all delay-[1000ms] duration-1000
                     group-[.animate:not(.show)]:opacity-0 group-[.animate:not(.show)]:translate-y-1/4
                 ">

@@ -9,6 +9,7 @@ import getContactsData from '@/lib/queries/getContactsData';
 import CookieConsentWrapper from '@/components/CookieConsentWrapper';
 import ButtonUp from '@/components/ButtonUp';
 import AnimationObserver from '@/lib/AnimationObserver';
+import ModalEnroll from '@/components/ModalEnroll';
 
 export const revalidate = 0;
 
@@ -25,7 +26,7 @@ export default async function RootLayout({ children }) {
             link: "/pricing",
         },
         {
-            name: "Клиника",
+            name: "О нас",
             link: "/clinic",
         },
         {
@@ -59,13 +60,14 @@ export default async function RootLayout({ children }) {
                 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"></link>
                 <link rel="icon" href="/favicon.ico" sizes="any" />
             </Head>
-            <body>
+            <body className='relative'>
                 <AnimationObserver />
                 <NextTopLoader
                     color="#D72642"
                     shadow="0 0 5px #BB132E"
                     showSpinner={false}
                 />
+                <ModalEnroll />
                 <Header paths={paths} />
                 <ButtonUp />
                 <CookieConsentWrapper />

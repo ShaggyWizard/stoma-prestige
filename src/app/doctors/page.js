@@ -1,6 +1,7 @@
 import Image from "next/image"
 import client from "@/lib/apollo-client"
 import { gql } from "@apollo/client";
+import ModalButton from "@/components/ModalButton";
 
 
 export const revalidate = 0;
@@ -138,9 +139,9 @@ const NashDoctor = ({ doctor, buttonText }) => {
             <div className="flex-1 flex flex-col justify-between gap-2">
                 <h5 className="group-[.card]:group-hover:text-primary duration-300 transition-colors">{doctor?.name}</h5>
                 <div className="text-grey-1 whitespace-pre-wrap">{doctor?.role}</div>
-                <div className="font-medium h-12 w-fit px-6 flex justify-center items-center py-auto rounded-3xl border border-primary text-primary hover:bg-primary hover:text-white duration-300">
+                <ModalButton className="font-medium h-12 w-fit px-6 flex justify-center items-center py-auto rounded-3xl border border-primary text-primary hover:bg-primary hover:text-white duration-300">
                     {buttonText}
-                </div>
+                </ModalButton>
             </div>
             <Image width={144}
                 height={206}

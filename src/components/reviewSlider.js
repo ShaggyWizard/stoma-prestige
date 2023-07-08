@@ -3,6 +3,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import Image from "next/image";
 import { useRef } from "react";
+import { Autoplay } from "swiper";
 
 export default function ReviewSlider({ children, nodes }) {
     const swiper = useRef(null);
@@ -31,6 +32,7 @@ export default function ReviewSlider({ children, nodes }) {
             </div>
 
             <Swiper ref={swiper} style={{overflow:"visible"}} slidesPerView={cols} spaceBetween={8} 
+                modules={[Autoplay]}  autoplay={{ delay: 5000, disableOnInteraction: false, }}
                 className="review-slider w-full h-[300px] overflow-visible transition-all duration-1000 delay-[800ms]
                 group-[.animate:not(.show)]:opacity-0 group-[.animate:not(.show)]:translate-y-1/2"
             >
