@@ -2,7 +2,7 @@ import client from "@/lib/apollo-client";
 import { gql } from "@apollo/client";
 
 
-export const revalidate = 0;
+export const revalidate = 120;;
 
 
 async function getData() {

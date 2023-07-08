@@ -6,7 +6,7 @@ import Image from "next/image"
 import { Fragment } from "react";
 
 
-export const revalidate = 0;
+export const revalidate = 120;;
 
 
 async function getData() {

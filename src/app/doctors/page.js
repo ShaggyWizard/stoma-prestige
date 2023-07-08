@@ -4,7 +4,7 @@ import { gql } from "@apollo/client";
 import ModalButton from "@/components/ModalButton";
 
 
-export const revalidate = 0;
+export const revalidate = 120;;
 
 
 async function getData() {

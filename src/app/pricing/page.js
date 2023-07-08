@@ -5,7 +5,7 @@ import Enroll from "@/components/enroll"
 import getPricingData from "@/lib/queries/getPricingData"
 import getPricingPageData from "@/lib/queries/getPricingPageData"
 
-export const revalidate = 0;
+export const revalidate = 120;;
 
 export default async function Home() {
 

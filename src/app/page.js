@@ -19,7 +19,7 @@ import ModalButton from '@/components/ModalButton'
 import getReviewsData from '@/lib/queries/getReviewsData'
 
 
-export const revalidate = 0;
+export const revalidate = 120;
 
 
 export default async function Home() {

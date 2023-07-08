@@ -11,7 +11,7 @@ import ButtonUp from '@/components/ButtonUp';
 import AnimationObserver from '@/lib/AnimationObserver';
 import ModalEnroll from '@/components/ModalEnroll';
 
-export const revalidate = 0;
+export const revalidate = 120;
 
 export const metadata = {
     title: 'Стоматология «Стома Престиж»',
